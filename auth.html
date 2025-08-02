@@ -27,91 +27,121 @@
 
     firebase.initializeApp(firebaseConfig);
   </script>
-  <style>
-    body {
-      font-family: 'Mulish', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background: #f4f4f4;
-    }
+    <style>
+      body {
+        font-family: 'Mulish', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: #f4f4f4;
+      }
     
-    .card {
-      background: white;
-      padding: 40px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      width: 100%;
-      max-width: 400px;
-    }
+      .card {
+        background: white;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        width: 100%;
+        max-width: 400px;
+        animation: fadeIn 0.6s ease-out;
+      }
     
-    h2 {
-      margin-bottom: 24px;
-      font-family: "Goldman", sans-serif;
-      font-size: 20px;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
+      h2 {
+        margin-bottom: 24px;
+        font-family: "Goldman", sans-serif;
+        font-size: 20px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
     
-    .logo {
-      height: 40px;
-      vertical-align: middle;
-    }
+      .logo {
+        height: 40px;
+        vertical-align: middle;
+      }
     
-    input {
-      font-family: "Goldman", sans-serif;
-      display: block;
-      margin-bottom: 16px;
-      padding: 12px 14px;
-      width: 100%;
-      font-size: 14px;
-      border: 2px solid #ccc;
-      border-radius: 8px;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
+      form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     
-    input:focus {
-      outline: none;
-      border-color: #DB0000;
-      box-shadow: 0 0 6px rgba(219, 0, 0, 0.2);
-    }
+      input {
+        font-family: "Goldman", sans-serif;
+        display: block;
+        margin-bottom: 16px;
+        padding: 12px 14px;
+        width: 100%;
+        max-width: 300px;
+        font-size: 14px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      }
     
-    button {
-      padding: 12px 24px;
-      background: #000000;
-      color: #ffffff;
-      border: 2px solid transparent;
-      border-radius: 10px;
-      font-family: "Goldman", sans-serif;
-      font-size: 14px;
-      cursor: pointer;
-      letter-spacing: 0.5px;
-      width: 100%;
-      transition:
-        background 0.25s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border 0.2s ease,
-        letter-spacing 0.2s ease;
-    }
+      input:focus {
+        outline: none;
+        border-color: #DB0000;
+        box-shadow: 0 0 6px rgba(219, 0, 0, 0.2);
+      }
     
-    button:hover {
-      background: #DB0000;
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-      border: 2px solid #900000;
-      letter-spacing: 1px;
-    }
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        font-family: "Goldman", sans-serif !important;
+        background-color: #fff !important;
+        -webkit-text-fill-color: #000 !important;
+        transition: background-color 0s ease-in-out 0s;
+        box-shadow: 0 0 0px 1000px white inset !important;
+      }
     
-    button:active {
-      transform: translateY(1px) scale(0.98);
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-    }
-  </style>
+      button {
+        padding: 12px 24px;
+        background: #000000;
+        color: #ffffff;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        font-family: "Goldman", sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+        letter-spacing: 0.5px;
+        transition:
+          background 0.25s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease,
+          border 0.2s ease,
+          letter-spacing 0.2s ease;
+      }
+    
+      button:hover {
+        background: #DB0000;
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+        border: 2px solid #900000;
+        letter-spacing: 1px;
+      }
+    
+      button:active {
+        transform: translateY(1px) scale(0.98);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+      }
+    
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
 </head>
 
 <body>
