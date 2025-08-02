@@ -119,7 +119,7 @@
     document.getElementById("logoutBtn").addEventListener("click", async () => {
       localStorage.setItem("logoutInProgress", "true"); // Marca la bandera para evitar doble alerta de inicio de sesión
       await auth.signOut();
-      alert("🔚 Game Over");
+      alert("🔚 Game Over Trkkie!");
       window.location.href = "auth.html";
     });
   </script>
