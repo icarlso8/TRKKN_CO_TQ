@@ -68,6 +68,125 @@
     // + render de canvas por tamaño
     // + integración con Tweakpane y fabric.js
     // Este bloque lo completaré en el siguiente paso
+    async function cargarJerarquia() {
+      const jsonPath = "../../Anunciante/TQ/json/";
+      const form = document.getElementById("formulario");
+  
+      const segmentos = await fetch(`${jsonPath}segmentos.json`).then(r => r.json());
+      const negocios = await fetch(`${jsonPath}negocios.json`).then(r => r.json());
+      const productos = await fetch(`${jsonPath}productos.json`).then(r => r.json());
+      const campañas = await fetch(`${jsonPath}campañas.json`).then(r => r.json());
+  
+      // ========== SEGMENTO ==========
+      const segmentoSection = document.createElement("div");
+      segmentoSection.className = "form-section";
+      const segmentoLabel = document.createElement("label");
+      segmentoLabel.innerHTML = "<strong>💊 Segmento:</strong>";
+      const segmentoSelect = document.createElement("select");
+      segmentoSelect.id = "segmento";
+      segmentoLabel.appendChild(segmentoSelect);
+      segmentoSection.appendChild(segmentoLabel);
+      form.appendChild(segmentoSection);
+  
+      segmentos.forEach(s => {
+        const opt = document.createElement("option");
+        opt.value = s.id;
+        opt.textContent = s.nombre;
+        segmentoSelect.appendChild(opt);
+      });
+  
+      // ========== NEGOCIO ==========
+      const negocioSection = document.createElement("div");
+      negocioSection.className = "form-section";
+      const negocioLabel = document.createElement("label");
+      negocioLabel.innerHTML = "<strong>🏭 Negocio/Marca:</strong>";
+      const negocioSelect = document.createElement("select");
+      negocioSelect.id = "negocio";
+      negocioLabel.appendChild(negocioSelect);
+      negocioSection.appendChild(negocioLabel);
+      form.appendChild(negocioSection);
+  
+      // ========== PRODUCTO ==========
+      const productoSection = document.createElement("div");
+      productoSection.className = "form-section";
+      const productoLabel = document.createElement("label");
+      productoLabel.innerHTML = "<strong>🧪 Producto:</strong>";
+      const productoSelect = document.createElement("select");
+      productoSelect.id = "producto";
+      productoLabel.appendChild(productoSelect);
+      productoSection.appendChild(productoLabel);
+      form.appendChild(productoSection);
+  
+      // ========== CAMPAÑA ==========
+      const campanaSection = document.createElement("div");
+      campanaSection.className = "form-section";
+      const campanaLabel = document.createElement("label");
+      campanaLabel.innerHTML = "<strong>📣 Campaña:</strong>";
+      const campanaSelect = document.createElement("select");
+      campanaSelect.id = "campana";
+      campanaLabel.appendChild(campanaSelect);
+      campanaSection.appendChild(campanaLabel);
+      form.appendChild(campanaSection);
+  
+      // Eventos en cascada
+      segmentoSelect.addEventListener("change", () => {
+        const segID = segmentoSelect.value;
+        negocioSelect.innerHTML = "";
+        productoSelect.innerHTML = "";
+        campanaSelect.innerHTML = "";
+  
+        if (negocios[segID]) {
+          negocios[segID].forEach(n => {
+            const opt = document.createElement("option");
+            opt.value = n.id;
+            opt.textContent = n.nombre;
+            negocioSelect.appendChild(opt);
+          });
+          negocioSelect.dispatchEvent(new Event("change"));
+        }
+      });
+  
+      negocioSelect.addEventListener("change", () => {
+        const segID = segmentoSelect.value;
+        const negID = negocioSelect.value;
+        productoSelect.innerHTML = "";
+        campanaSelect.innerHTML = "";
+  
+        if (productos[segID] && productos[segID][negID]) {
+          productos[segID][negID].forEach(p => {
+            const opt = document.createElement("option");
+            opt.value = p.id;
+            opt.textContent = p.nombre;
+            productoSelect.appendChild(opt);
+          });
+          productoSelect.dispatchEvent(new Event("change"));
+        }
+      });
+  
+      productoSelect.addEventListener("change", () => {
+        const segID = segmentoSelect.value;
+        const negID = negocioSelect.value;
+        const prodID = productoSelect.value;
+        campanaSelect.innerHTML = "";
+  
+        if (campañas[segID] && campañas[segID][negID] && campañas[segID][negID][prodID]) {
+          campañas[segID][negID][prodID].forEach(c => {
+            const opt = document.createElement("option");
+            opt.value = c.id;
+            opt.textContent = c.nombre;
+            campanaSelect.appendChild(opt);
+          });
+        }
+      });
+  
+      segmentoSelect.dispatchEvent(new Event("change"));
+    }
+  
+    document.addEventListener("DOMContentLoaded", cargarJerarquia);
+  </script>
+
+
+    
   </script>
 </body>
 </html>
