@@ -8,7 +8,7 @@
       { "id": "dia", "nombre": "Día", "emoji": "🌞" },
       { "id": "noche", "nombre": "Noche", "emoji": "🌙" }
     ]
-  }
+  },
   {
     "id": "ciudad",
     "nombre": "Ciudad",
@@ -20,4 +20,5 @@
     ]
   }
 ]
+
 
