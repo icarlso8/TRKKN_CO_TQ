@@ -204,7 +204,7 @@
             checkbox.value = op.id;
     
             const span = document.createElement("span");
-            span.textContent = ` ${op.nombre}`;
+            span.textContent = `${op.emoji || ""} ${op.nombre}`;
     
             const wrapper = document.createElement("label");
             wrapper.appendChild(checkbox);
