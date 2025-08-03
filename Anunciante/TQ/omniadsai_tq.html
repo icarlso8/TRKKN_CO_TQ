@@ -219,8 +219,11 @@
       });
     }
 
-    document.addEventListener("DOMContentLoaded", cargarJerarquia);
-    document.addEventListener("DOMContentLoaded", cargarFactores);
+    document.addEventListener("DOMContentLoaded", async () => {
+      await cargarJerarquia();
+      await cargarFactores();
+});
+
     
   </script>
 </body>
