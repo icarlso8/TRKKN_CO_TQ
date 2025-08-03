@@ -37,7 +37,19 @@
     canvas {
       border: 1px solid #ccc;
     }
+    fieldset.form-group {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 24px;
+    }
+    legend {
+      font-weight: bold;
+      font-size: 1.1em;
+      padding: 0 10px;
+    }
   </style>
+  
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
