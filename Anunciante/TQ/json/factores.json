@@ -9,4 +9,14 @@
       { "id": "noche", "nombre": "Noche", "emoji": "🌙" }
     ]
   }
+    {
+    "id": "ciudad",
+    "nombre": "Ciudad",
+    "emoji": "📌",
+    "tipo": "checkbox",
+    "opciones": [
+      { "id": "bogota", "nombre": "Bogotá D.C.", "emoji": "🏛️" },
+      { "id": "cartagena", "nombre": "Cartagena", "emoji": "🏖️" }
+    ]
+  }
 ]
