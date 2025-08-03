@@ -93,11 +93,16 @@
       }
       
       /* ✅ Solución estable para forzar Goldman en autofill */
-      input:-webkit-autofill {
-        -webkit-box-shadow: 0 0 0px 1000px #eaf6ff inset !important;
-        -webkit-text-fill-color: #000 !important;
+      input,
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
         font-family: "Goldman", sans-serif !important;
         font-size: 12px !important;
+        -webkit-text-fill-color: #000 !important;
+        transition: background-color 9999s ease-in-out 0s !important;
+        -webkit-box-shadow: 0 0 0px 1000px #eaf6ff inset !important;
       }
       
       /* Necesario en Firefox */
