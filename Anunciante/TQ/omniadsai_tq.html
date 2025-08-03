@@ -83,7 +83,14 @@
     async function cargarJerarquia() {
       const jsonPath = "../../Anunciante/TQ/json/";
       const form = document.getElementById("formulario");
-  
+      
+      const sectionJerarquia = document.createElement("fieldset");
+      sectionJerarquia.className = "form-group";
+      const legendJerarquia = document.createElement("legend");
+      legendJerarquia.innerHTML = "📋 Información de la campaña";
+      sectionJerarquia.appendChild(legendJerarquia);
+      form.appendChild(sectionJerarquia);
+
       const segmentos = await fetch(`${jsonPath}segmentos.json`).then(r => r.json());
       const negocios = await fetch(`${jsonPath}negocios.json`).then(r => r.json());
       const productos = await fetch(`${jsonPath}productos.json`).then(r => r.json());
@@ -98,7 +105,7 @@
       segmentoSelect.id = "segmento";
       segmentoLabel.appendChild(segmentoSelect);
       segmentoSection.appendChild(segmentoLabel);
-      form.appendChild(segmentoSection);
+      sectionJerarquia.appendChild(segmentoSection);
   
       segmentos.forEach(s => {
         const opt = document.createElement("option");
@@ -116,7 +123,7 @@
       negocioSelect.id = "negocio";
       negocioLabel.appendChild(negocioSelect);
       negocioSection.appendChild(negocioLabel);
-      form.appendChild(negocioSection);
+      sectionJerarquia.appendChild(negocioSection);
   
       // ========== PRODUCTO ==========
       const productoSection = document.createElement("div");
@@ -127,7 +134,7 @@
       productoSelect.id = "producto";
       productoLabel.appendChild(productoSelect);
       productoSection.appendChild(productoLabel);
-      form.appendChild(productoSection);
+      sectionJerarquia.appendChild(productoSection);
   
       // ========== CAMPAÑA ==========
       const campanaSection = document.createElement("div");
@@ -138,7 +145,7 @@
       campanaSelect.id = "campana";
       campanaLabel.appendChild(campanaSelect);
       campanaSection.appendChild(campanaLabel);
-      form.appendChild(campanaSection);
+      sectionJerarquia.appendChild(campanaSection);
   
       // Eventos en cascada
       segmentoSelect.addEventListener("change", () => {
@@ -197,6 +204,13 @@
     async function cargarFactores() {
       const jsonPath = "../../Anunciante/TQ/json/";
       const form = document.getElementById("formulario");
+
+      const sectionFactores = document.createElement("fieldset");
+      sectionFactores.className = "form-group";
+      const legendFactores = document.createElement("legend");
+      legendFactores.innerHTML = "🎯 Factores/Contexto";
+      sectionFactores.appendChild(legendFactores);
+      form.appendChild(sectionFactores);
     
       const factores = await fetch(`${jsonPath}factores.json`).then(r => r.json());
     
@@ -227,7 +241,7 @@
           });
         }
     
-        form.appendChild(section);
+        sectionFactores.appendChild(section);
       });
     }
 
