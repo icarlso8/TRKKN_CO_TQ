@@ -220,17 +220,46 @@
       segmentoSelect.dispatchEvent(new Event("change"));
     }
 
-    async function cargarFactores() {
+    async function cargarAudienciaFactores() {
       const jsonPath = "../../Anunciante/TQ/json/";
       const form = document.getElementById("formulario");
-
-      const sectionFactores = document.createElement("fieldset");
-      sectionFactores.className = "form-group";
-      const legendFactores = document.createElement("legend");
-      legendFactores.innerHTML = "🎯 Audiencia (Factores Contextuales)";
-      sectionFactores.appendChild(legendFactores);
-      form.appendChild(sectionFactores);
     
+      const sectionContexto = document.createElement("fieldset");
+      sectionContexto.className = "form-group";
+      const legend = document.createElement("legend");
+      legend.innerHTML = "👥 Audiencia (Factores/Contexto)";
+      sectionContexto.appendChild(legend);
+      form.appendChild(sectionContexto);
+    
+      // 🔹 AUDIENCIAS
+      const audiencias = await fetch(`${jsonPath}audiencias.json`).then(r => r.json());
+      const audienciaSection = document.createElement("div");
+      audienciaSection.className = "form-section";
+    
+      const audienciaLabel = document.createElement("label");
+      audienciaLabel.innerHTML = "<strong>👥 Audiencia:</strong>";
+      audienciaSection.appendChild(audienciaLabel);
+    
+      audiencias.forEach(aud => {
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.name = "audiencia";
+        checkbox.value = aud.id;
+    
+        const span = document.createElement("span");
+        span.textContent = ` ${aud.emoji || ""} ${aud.nombre}`;
+    
+        const wrapper = document.createElement("label");
+        wrapper.appendChild(checkbox);
+        wrapper.appendChild(span);
+        wrapper.style.marginRight = "16px";
+    
+        audienciaSection.appendChild(wrapper);
+      });
+    
+      sectionContexto.appendChild(audienciaSection);
+    
+      // 🔹 FACTORES CONTEXTUALES
       const factores = await fetch(`${jsonPath}factores.json`).then(r => r.json());
     
       factores.forEach(factor => {
@@ -260,13 +289,13 @@
           });
         }
     
-        sectionFactores.appendChild(section);
+        sectionContexto.appendChild(section);
       });
     }
 
     document.addEventListener("DOMContentLoaded", async () => {
       await cargarJerarquia();
-      await cargarFactores();
+      await cargarAudienciaFactores();
 });
 
     
