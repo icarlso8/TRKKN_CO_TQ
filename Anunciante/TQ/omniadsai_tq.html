@@ -181,11 +181,46 @@
   
       segmentoSelect.dispatchEvent(new Event("change"));
     }
-  
+
+    async function cargarFactores() {
+      const jsonPath = "../../Anunciante/TQ/json/";
+      const form = document.getElementById("formulario");
+    
+      const factores = await fetch(`${jsonPath}factores.json`).then(r => r.json());
+    
+      factores.forEach(factor => {
+        const section = document.createElement("div");
+        section.className = "form-section";
+    
+        const label = document.createElement("label");
+        label.innerHTML = `<strong>${factor.emoji} ${factor.nombre}:</strong>`;
+        section.appendChild(label);
+    
+        if (factor.tipo === "checkbox") {
+          factor.opciones.forEach(op => {
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.name = factor.id;
+            checkbox.value = op.id;
+    
+            const span = document.createElement("span");
+            span.textContent = ` ${op.nombre}`;
+    
+            const wrapper = document.createElement("label");
+            wrapper.appendChild(checkbox);
+            wrapper.appendChild(span);
+            wrapper.style.marginRight = "16px";
+    
+            section.appendChild(wrapper);
+          });
+        }
+    
+        form.appendChild(section);
+      });
+    }
+
     document.addEventListener("DOMContentLoaded", cargarJerarquia);
-  </script>
-
-
+    document.addEventListener("DOMContentLoaded", cargarFactores);
     
   </script>
 </body>
