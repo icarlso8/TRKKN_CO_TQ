@@ -36,17 +36,16 @@
         height: 100vh;
         background: #f4f4f4;
       }
-    
+      
       .card {
         background: white;
-        padding: 40px;
+        padding: 30px;
         border-radius: 16px;
         box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        width: 100%;
-        max-width: 400px;
+        width: 300px;
         animation: fadeIn 0.6s ease-out;
       }
-    
+      
       h2 {
         margin-bottom: 24px;
         font-family: "Goldman", sans-serif;
@@ -57,49 +56,45 @@
         justify-content: center;
         gap: 10px;
       }
-    
+      
       .logo {
         height: 40px;
         vertical-align: middle;
       }
-    
+      
       form {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
       }
-    
+      
       input {
         font-family: "Goldman", sans-serif;
         display: block;
         margin-bottom: 16px;
         padding: 12px 14px;
         width: 100%;
-        max-width: 300px;
         font-size: 14px;
         border: 2px solid #ccc;
         border-radius: 8px;
         transition: border-color 0.3s ease, box-shadow 0.3s ease;
       }
-    
+      
       input:focus {
         outline: none;
         border-color: #DB0000;
         box-shadow: 0 0 6px rgba(219, 0, 0, 0.2);
       }
-    
-      input:-webkit-autofill,
-      input:-webkit-autofill:hover,
-      input:-webkit-autofill:focus,
-      input:-webkit-autofill:active {
+      
+      /* 👇 Forzar la fuente en autofill sin cambiar color */
+      input:-webkit-autofill {
         font-family: "Goldman", sans-serif !important;
-        background-color: #fff !important;
+        -webkit-box-shadow: 0 0 0px 1000px #eaf6ff inset;
         -webkit-text-fill-color: #000 !important;
-        transition: background-color 0s ease-in-out 0s;
-        box-shadow: 0 0 0px 1000px white inset !important;
+        transition: background-color 5000s ease-in-out 0s;
       }
-    
+      
       button {
         padding: 12px 24px;
         background: #000000;
@@ -116,8 +111,9 @@
           box-shadow 0.2s ease,
           border 0.2s ease,
           letter-spacing 0.2s ease;
+        width: auto;
       }
-    
+      
       button:hover {
         background: #DB0000;
         transform: translateY(-2px) scale(1.02);
@@ -125,12 +121,12 @@
         border: 2px solid #900000;
         letter-spacing: 1px;
       }
-    
+      
       button:active {
         transform: translateY(1px) scale(0.98);
         box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
       }
-    
+      
       @keyframes fadeIn {
         from {
           opacity: 0;
