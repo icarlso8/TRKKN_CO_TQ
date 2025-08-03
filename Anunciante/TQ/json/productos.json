@@ -1,8 +1,9 @@
 {
   "farmaceutico": {
     "gastrointestinal": [
-      { "id": "gastrofast_advanced", "nombre": "💊 Gastrofast Advanced" }
+      { "id": "gastrofast_advanced", "nombre": "Gastrofast Advanced" }
     ]
   }
 }
+
 
