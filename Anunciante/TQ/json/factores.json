@@ -9,7 +9,7 @@
       { "id": "noche", "nombre": "Noche", "emoji": "🌙" }
     ]
   }
-    {
+  {
     "id": "ciudad",
     "nombre": "Ciudad",
     "emoji": "📌",
@@ -20,3 +20,4 @@
     ]
   }
 ]
+
