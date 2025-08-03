@@ -28,6 +28,8 @@
     firebase.initializeApp(firebaseConfig);
   </script>
     <style>
+      @layer autofill-fix;
+      
       body {
         font-family: 'Mulish', sans-serif;
         display: flex;
@@ -92,7 +94,7 @@
         box-shadow: 0 0 6px rgba(219, 0, 0, 0.2);
       }
       
-      /* ✅ Solución estable para forzar Goldman en autofill */
+      /* ✅ Solución estable para forzar Goldman en autofill
       input,
       input:-webkit-autofill,
       input:-webkit-autofill:hover,
@@ -103,8 +105,28 @@
         -webkit-text-fill-color: #000 !important;
         transition: background-color 9999s ease-in-out 0s !important;
         -webkit-box-shadow: 0 0 0px 1000px #eaf6ff inset !important;
+      } */
+
+      @layer autofill-fix {
+        input:-webkit-autofill {
+          animation-name: autofillReset;
+          animation-fill-mode: both;
+          animation-duration: 1ms;
+          font-family: "Goldman", sans-serif !important;
+          font-size: 12px !important;
+          -webkit-text-fill-color: #000 !important;
+        }
       }
       
+      @keyframes autofillReset {
+        0% {
+          font-family: "Goldman", sans-serif;
+        }
+        100% {
+          font-family: "Goldman", sans-serif;
+        }
+      }
+
       /* Necesario en Firefox */
       input:-moz-autofill {
         font-family: "Goldman", sans-serif !important;
