@@ -146,7 +146,26 @@
       campanaLabel.appendChild(campanaSelect);
       campanaSection.appendChild(campanaLabel);
       sectionJerarquia.appendChild(campanaSection);
-  
+
+      // ========== DESCRIPCIÓN ==========
+      const descripcionSection = document.createElement("div");
+      descripcionSection.className = "form-section";
+      
+      const descripcionLabel = document.createElement("label");
+      descripcionLabel.setAttribute("for", "descripcion");
+      descripcionLabel.innerHTML = "<strong>📝 Descripción:</strong>";
+      
+      const descripcionInput = document.createElement("textarea");
+      descripcionInput.id = "descripcion";
+      descripcionInput.name = "descripcion";
+      descripcionInput.rows = 3;
+      descripcionInput.style.width = "100%";
+      descripcionInput.placeholder = "Escribe detalles clave sobre el producto, campaña, temporada, lenguaje, expresiones, etc.";
+      
+      descripcionSection.appendChild(descripcionLabel);
+      descripcionSection.appendChild(descripcionInput);
+      sectionJerarquia.appendChild(descripcionSection);
+
       // Eventos en cascada
       segmentoSelect.addEventListener("change", () => {
         const segID = segmentoSelect.value;
