@@ -293,12 +293,65 @@
       });
     }
 
+    async function cargarTamanosYCanvas() {
+      const jsonPath = "../../Anunciante/TQ/json/";
+      const canvasContainer = document.getElementById("canvasContainer");
+    
+      const tamanos = await fetch(`${jsonPath}tamaños.json`).then(r => r.json());
+    
+      tamanos.forEach(t => {
+        const wrapper = document.createElement("div");
+        wrapper.style.display = "flex";
+        wrapper.style.flexDirection = "column";
+        wrapper.style.alignItems = "center";
+        wrapper.style.marginBottom = "24px";
+    
+        // Checkbox para activar el tamaño
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = `check_${t.id}`;
+        checkbox.checked = true;
+        checkbox.style.marginBottom = "8px";
+    
+        const label = document.createElement("label");
+        label.setAttribute("for", checkbox.id);
+        label.textContent = `🖼️ ${t.nombre}`;
+        label.style.marginBottom = "8px";
+        label.style.fontWeight = "bold";
+    
+        const canvas = document.createElement("canvas");
+        canvas.id = `canvas_${t.id}`;
+        canvas.width = t.ancho;
+        canvas.height = t.alto;
+    
+        wrapper.appendChild(checkbox);
+        wrapper.appendChild(label);
+        wrapper.appendChild(canvas);
+        canvasContainer.appendChild(wrapper);
+    
+        const fabricCanvas = new fabric.Canvas(canvas.id, {
+          backgroundColor: "#ffffff",
+          selection: true
+        });
+    
+        if (!window.canvasRefs) window.canvasRefs = {};
+        window.canvasRefs[t.id] = {
+          canvas: fabricCanvas,
+          activo: checkbox.checked
+        };
+    
+        checkbox.addEventListener("change", () => {
+          window.canvasRefs[t.id].activo = checkbox.checked;
+          canvas.style.opacity = checkbox.checked ? "1" : "0.3";
+        });
+      });
+    }
+
     document.addEventListener("DOMContentLoaded", async () => {
       await cargarJerarquia();
       await cargarAudienciaFactores();
+      await cargarTamanosYCanvas();
 });
-
-    
   </script>
 </body>
 </html>
