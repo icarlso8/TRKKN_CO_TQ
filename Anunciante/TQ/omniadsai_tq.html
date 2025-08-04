@@ -231,6 +231,20 @@
         placeholderNegocio.selected = true;
         negocioSelect.appendChild(placeholderNegocio);
 
+        const placeholderProducto = document.createElement("option");
+        placeholderProducto.value = "";
+        placeholderProducto.textContent = "Selecciona un producto";
+        placeholderProducto.disabled = true;
+        placeholderProducto.selected = true;
+        productoSelect.appendChild(placeholderProducto);
+      
+        const placeholderCampana = document.createElement("option");
+        placeholderCampana.value = "";
+        placeholderCampana.textContent = "Selecciona una campaña";
+        placeholderCampana.disabled = true;
+        placeholderCampana.selected = true;
+        campanaSelect.appendChild(placeholderCampana);
+
         if (negocios[segID]) {
           negocios[segID].forEach(n => {
             const opt = document.createElement("option");
