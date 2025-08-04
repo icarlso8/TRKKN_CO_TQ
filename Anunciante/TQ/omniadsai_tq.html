@@ -121,6 +121,13 @@
       segmentoLabel.appendChild(segmentoSelect);
       segmentoSection.appendChild(segmentoLabel);
       sectionJerarquia.appendChild(segmentoSection);
+
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.textContent = "Selecciona un segmento";
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      segmentoSelect.appendChild(placeholder);
   
       segmentos.forEach(s => {
         const opt = document.createElement("option");
