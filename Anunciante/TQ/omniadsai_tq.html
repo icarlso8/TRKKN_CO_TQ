@@ -103,63 +103,6 @@
         document.body.style.display = "block";
       }
     });
-
-    window.initTweakpane = async function (canvasID) {
-      const contenedor = document.getElementById(`panel_${canvasID}`);
-      if (!contenedor) return;
-    
-      const pane = new Tweakpane.Pane({ title: `🎛️ Opciones ${canvasID}` });
-      contenedor.appendChild(pane.element);
-    
-      const [logos, iconos, copies] = await Promise.all([
-        fetch("json/logos.json").then(r => r.json()),
-        fetch("json/iconos.json").then(r => r.json()),
-        fetch("json/copies.json").then(r => r.json())
-      ]);
-    
-      // LOGOS
-      pane.addBlade({
-        view: 'list',
-        label: '🪪 Logo',
-        options: logos.map(l => ({ text: l.nombre, value: l.id }))
-      }).on('change', ev => {
-        const selected = logos.find(l => l.id === ev.value);
-        if (selected) agregarElementoAlCanvas(selected, 'logo', canvasID);
-      });
-    
-      // ICONOS
-      pane.addBlade({
-        view: 'list',
-        label: '🔘 Icono',
-        options: iconos.map(i => ({ text: i.nombre, value: i.id }))
-      }).on('change', ev => {
-        const selected = iconos.find(i => i.id === ev.value);
-        if (selected) agregarElementoAlCanvas(selected, 'icono', canvasID);
-      });
-    
-      // COPIES
-      pane.addBlade({
-        view: 'list',
-        label: '✍️ Copy',
-        options: copies.map(c => ({ text: c.texto.slice(0, 40), value: c.id }))
-      }).on('change', ev => {
-        const selected = copies.find(c => c.id === ev.value);
-        if (selected) agregarTextoAlCanvas(selected, canvasID);
-      });
-    
-      // COPY PERSONALIZADO
-      pane.addBlade({
-        view: 'list',
-        label: '🆕 Copy libre',
-        value: ''
-      }).on('change', ev => {
-        if (ev.value.trim()) {
-          agregarTextoAlCanvas({ texto: ev.value }, canvasID);
-        }
-      });
-    };
-
-  </script>
 </head>
   
 <body style="display:none">
@@ -495,6 +438,61 @@
       });
       canvas.add(text);
     }
+
+      window.initTweakpane = async function (canvasID) {
+      const contenedor = document.getElementById(`panel_${canvasID}`);
+      if (!contenedor) return;
+    
+      const pane = new Tweakpane.Pane({ title: `🎛️ Opciones ${canvasID}` });
+      contenedor.appendChild(pane.element);
+    
+      const [logos, iconos, copies] = await Promise.all([
+        fetch("json/logos.json").then(r => r.json()),
+        fetch("json/iconos.json").then(r => r.json()),
+        fetch("json/copies.json").then(r => r.json())
+      ]);
+    
+      // LOGOS
+      pane.addBlade({
+        view: 'list',
+        label: '🪪 Logo',
+        options: logos.map(l => ({ text: l.nombre, value: l.id }))
+      }).on('change', ev => {
+        const selected = logos.find(l => l.id === ev.value);
+        if (selected) agregarElementoAlCanvas(selected, 'logo', canvasID);
+      });
+    
+      // ICONOS
+      pane.addBlade({
+        view: 'list',
+        label: '🔘 Icono',
+        options: iconos.map(i => ({ text: i.nombre, value: i.id }))
+      }).on('change', ev => {
+        const selected = iconos.find(i => i.id === ev.value);
+        if (selected) agregarElementoAlCanvas(selected, 'icono', canvasID);
+      });
+    
+      // COPIES
+      pane.addBlade({
+        view: 'list',
+        label: '✍️ Copy',
+        options: copies.map(c => ({ text: c.texto.slice(0, 40), value: c.id }))
+      }).on('change', ev => {
+        const selected = copies.find(c => c.id === ev.value);
+        if (selected) agregarTextoAlCanvas(selected, canvasID);
+      });
+    
+      // COPY PERSONALIZADO
+      pane.addBlade({
+        view: 'list',
+        label: '🆕 Copy libre',
+        value: ''
+      }).on('change', ev => {
+        if (ev.value.trim()) {
+          agregarTextoAlCanvas({ texto: ev.value }, canvasID);
+        }
+      });
+    };
 
   </script>
 </body>
