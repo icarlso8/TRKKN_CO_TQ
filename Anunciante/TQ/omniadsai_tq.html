@@ -126,20 +126,23 @@
       for (const [id, data] of Object.entries(selects)) {
         const div = document.createElement("div");
         div.className = "form-section";
-
+      
         const label = document.createElement("label");
+        label.setAttribute("for", id);
         label.innerHTML = `<strong>${data.label}:</strong>`;
-
+      
         const select = document.createElement("select");
         select.id = id;
-        label.appendChild(select);
-        div.appendChild(label);
-        section.appendChild(div);
+        select.style.marginLeft = "8px"; // 👈 Separación {Campo}: 8px {Dropdown}
         elements[id] = select;
-
+      
+        div.appendChild(label);
+        div.appendChild(select);
+        section.appendChild(div);
+      
         const placeholderText = `Selecciona un ${data.label.split(' ')[1].toLowerCase()}`;
         select.appendChild(crearPlaceholder(placeholderText));
-
+      
         if (data.opciones) {
           data.opciones.forEach(opt => {
             const option = document.createElement("option");
