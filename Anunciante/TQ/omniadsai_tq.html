@@ -306,7 +306,9 @@
       placeholderCampanaInicial.selected = true;
       campanaSelect.appendChild(placeholderCampanaInicial);
   
-      segmentoSelect.dispatchEvent(new Event("change"));
+      // No disparar la cascada automáticamente para preservar los placeholders iniciales
+      // segmentoSelect.dispatchEvent(new Event("change"));
+
     }
 
     async function cargarAudienciaFactores() {
