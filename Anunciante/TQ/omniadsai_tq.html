@@ -290,6 +290,21 @@
           });
         }
       });
+
+      // Reagregar los placeholders iniciales antes del primer disparo en cascada
+      const placeholderProductoInicial = document.createElement("option");
+      placeholderProductoInicial.value = "";
+      placeholderProductoInicial.textContent = "Selecciona un producto";
+      placeholderProductoInicial.disabled = true;
+      placeholderProductoInicial.selected = true;
+      productoSelect.appendChild(placeholderProductoInicial);
+      
+      const placeholderCampanaInicial = document.createElement("option");
+      placeholderCampanaInicial.value = "";
+      placeholderCampanaInicial.textContent = "Selecciona una campaña";
+      placeholderCampanaInicial.disabled = true;
+      placeholderCampanaInicial.selected = true;
+      campanaSelect.appendChild(placeholderCampanaInicial);
   
       segmentoSelect.dispatchEvent(new Event("change"));
     }
