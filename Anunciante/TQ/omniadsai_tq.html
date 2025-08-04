@@ -283,12 +283,15 @@
       form.appendChild(section);
 
       const audiencias = await fetch(`${jsonPath}audiencias.json`).then(r => r.json());
+      // Título Audiencia
+      const tituloAud = document.createElement("div");
+      tituloAud.className = "form-section";
+      tituloAud.innerHTML = `<strong>🎯 Audiencia:</strong>`;
+      section.appendChild(tituloAud);
+      
+      // Opciones de audiencia con sangría
       const divAud = document.createElement("div");
       divAud.className = "form-section audiencias-opciones";
-      const tituloAud = document.createElement("div");
-      tituloAud.style.flexBasis = "100%";
-      tituloAud.innerHTML = `<strong>🎯 Audiencia:</strong>`;
-      divAud.appendChild(tituloAud);
 
       audiencias.forEach(aud => {
         const checkbox = document.createElement("input");
