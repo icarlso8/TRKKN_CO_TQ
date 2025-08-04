@@ -312,29 +312,36 @@
 
       const factores = await fetch(`${jsonPath}factores.json`).then(r => r.json());
       factores.forEach(factor => {
-        const div = document.createElement("div");
-        div.className = "form-section";
-        div.innerHTML = `<label><strong>${factor.emoji} ${factor.nombre}:</strong></label>`;
-
+        // Título del factor
+        const tituloFactor = document.createElement("div");
+        tituloFactor.className = "form-section";
+        tituloFactor.innerHTML = `<strong>${factor.emoji} ${factor.nombre}:</strong>`;
+        section.appendChild(tituloFactor);
+      
+        // Opciones con sangría
+        const divOpciones = document.createElement("div");
+        divOpciones.className = "form-section audiencias-opciones";
+      
         if (factor.tipo === "checkbox") {
           factor.opciones.forEach(op => {
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.name = factor.id;
             checkbox.value = op.id;
-
+      
             const span = document.createElement("span");
             span.textContent = `${op.emoji || ""} ${op.nombre}`;
-
+      
             const wrapper = document.createElement("label");
             wrapper.appendChild(checkbox);
             wrapper.appendChild(span);
             wrapper.style.marginRight = "16px";
-
-            div.appendChild(wrapper);
+      
+            divOpciones.appendChild(wrapper);
           });
         }
-        section.appendChild(div);
+      
+        section.appendChild(divOpciones);
       });
     }
 
