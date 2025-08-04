@@ -92,6 +92,9 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    .form-section.audiencias-opciones {
+      margin-left: 24px;
+    }
   </style>
   
   <script type="module">
@@ -281,7 +284,7 @@
 
       const audiencias = await fetch(`${jsonPath}audiencias.json`).then(r => r.json());
       const divAud = document.createElement("div");
-      divAud.className = "form-section";
+      divAud.className = "form-section audiencias-opciones";
       const tituloAud = document.createElement("div");
       tituloAud.style.flexBasis = "100%";
       tituloAud.innerHTML = `<strong>🎯 Audiencia:</strong>`;
