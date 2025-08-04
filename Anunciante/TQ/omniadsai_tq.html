@@ -102,48 +102,61 @@
       }
     });
 
-    // 🔧 Configuración básica del primer módulo Drag & Drop con Tweakpane
-    window.initTweakpane = function(canvasId) {
-      const pane = new Tweakpane.Pane({ title: `🎛️ Opciones ${canvasId}` });
-      const config = {
-        logo: 'Logo_A',
-        icono: 'Icono_A',
-        copy: 'Texto_A',
-      };
-      pane.addBinding(config, 'logo', {
-        options: {
-          'Logo_A': 'Logo_A',
-          'Logo_B': 'Logo_B',
-          'Logo_C': 'Logo_C',
-        },
+    window.initTweakpane = async function (canvasID) {
+      const contenedor = document.getElementById(`panel_${canvasID}`);
+      if (!contenedor) return;
+    
+      const pane = new Tweakpane.Pane({ title: `🎛️ Opciones ${canvasID}` });
+      contenedor.appendChild(pane.element);
+    
+      const [logos, iconos, copies] = await Promise.all([
+        fetch("Anunciante/TQ/json/logos.json").then(r => r.json()),
+        fetch("Anunciante/TQ/json/iconos.json").then(r => r.json()),
+        fetch("Anunciante/TQ/json/copies.json").then(r => r.json())
+      ]);
+    
+      // LOGOS
+      pane.addBlade({
+        view: 'list',
         label: '🪪 Logo',
+        options: logos.map(l => ({ text: l.nombre, value: l.id }))
+      }).on('change', ev => {
+        const selected = logos.find(l => l.id === ev.value);
+        if (selected) agregarElementoAlCanvas(selected, 'logo', canvasID);
       });
-      pane.addBinding(config, 'icono', {
-        options: {
-          'Icono_A': 'Icono_A',
-          'Icono_B': 'Icono_B',
-          'Icono_C': 'Icono_C',
-        },
+    
+      // ICONOS
+      pane.addBlade({
+        view: 'list',
         label: '🔘 Icono',
+        options: iconos.map(i => ({ text: i.nombre, value: i.id }))
+      }).on('change', ev => {
+        const selected = iconos.find(i => i.id === ev.value);
+        if (selected) agregarElementoAlCanvas(selected, 'icono', canvasID);
       });
-      pane.addBinding(config, 'copy', {
-        options: {
-          'Texto_A': 'Texto_A',
-          'Texto_B': 'Texto_B',
-          'Texto_C': 'Texto_C',
-        },
+    
+      // COPIES
+      pane.addBlade({
+        view: 'list',
         label: '✍️ Copy',
+        options: copies.map(c => ({ text: c.texto.slice(0, 40), value: c.id }))
+      }).on('change', ev => {
+        const selected = copies.find(c => c.id === ev.value);
+        if (selected) agregarTextoAlCanvas(selected, canvasID);
       });
-
-      // Aquí se podrían añadir listeners para aplicar cambios al canvas
-      pane.on('change', (ev) => {
-        console.log(`[${canvasId}]`, ev.presetKey, '➡️', ev.value);
+    
+      // COPY PERSONALIZADO
+      pane.addBlade({
+        view: 'text',
+        label: '🆕 Copy libre',
+        value: ''
+      }).on('change', ev => {
+        if (ev.value.trim()) {
+          agregarTextoAlCanvas({ texto: ev.value }, canvasID);
+        }
       });
-
-      // Añadir a la interfaz
-      const contenedor = document.getElementById(`panel_${canvasId}`);
-      if (contenedor) contenedor.appendChild(pane.element);
     };
+
   </script>
 </head>
   
