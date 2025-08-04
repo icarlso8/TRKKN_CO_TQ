@@ -270,6 +270,17 @@
         placeholderProducto.selected = true;
         productoSelect.appendChild(placeholderProducto);
 
+        // 🔹 Reagregar placeholder a productoSelect (Esto asegura que los <select>: Muestran el placeholder desde el inicio ✔️ / Y lo restauran cuando el valor depende de la selección anterior ✔️
+        const placeholderCampana = document.createElement("option");
+        placeholderCampana.value = "";
+        placeholderCampana.textContent = "Selecciona una campaña";
+        placeholderCampana.disabled = true;
+        placeholderCampana.selected = true;
+        campanaSelect.appendChild(placeholderCampana);
+
+        // ✅ Solo continuar si hay negocio seleccionado
+        if (!negID) return;
+
         if (productos[segID] && productos[segID][negID]) {
           productos[segID][negID].forEach(p => {
             const opt = document.createElement("option");
