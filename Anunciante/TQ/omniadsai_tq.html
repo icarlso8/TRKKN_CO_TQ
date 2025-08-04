@@ -163,6 +163,15 @@
       productoLabel.innerHTML = "<strong>💊 Producto:</strong>";
       const productoSelect = document.createElement("select");
       productoSelect.id = "producto";
+
+      // 🔸 Placeholder
+      const placeholderProducto = document.createElement("option");
+      placeholderProducto.value = "";
+      placeholderProducto.textContent = "Selecciona un producto";
+      placeholderProducto.disabled = true;
+      placeholderProducto.selected = true;
+      productoSelect.appendChild(placeholderProducto);
+
       productoLabel.appendChild(productoSelect);
       productoSection.appendChild(productoLabel);
       sectionJerarquia.appendChild(productoSection);
@@ -174,6 +183,15 @@
       campanaLabel.innerHTML = "<strong>📣 Campaña:</strong>";
       const campanaSelect = document.createElement("select");
       campanaSelect.id = "campana";
+
+      // 🔸 Placeholder
+      const placeholderCampana = document.createElement("option");
+      placeholderCampana.value = "";
+      placeholderCampana.textContent = "Selecciona una campaña";
+      placeholderCampana.disabled = true;
+      placeholderCampana.selected = true;
+      campanaSelect.appendChild(placeholderCampana);
+
       campanaLabel.appendChild(campanaSelect);
       campanaSection.appendChild(campanaLabel);
       sectionJerarquia.appendChild(campanaSection);
@@ -204,7 +222,7 @@
         productoSelect.innerHTML = "";
         campanaSelect.innerHTML = "";
       
-        // 🔹 Reagregar placeholder a negocioSelect
+        // 🔹 Reagregar placeholder a negocioSelect (Esto asegura que los <select>: Muestran el placeholder desde el inicio ✔️ / Y lo restauran cuando el valor depende de la selección anterior ✔️
         const placeholderNegocio = document.createElement("option");
         placeholderNegocio.value = "";
         placeholderNegocio.textContent = "Selecciona un negocio/marca";
@@ -229,7 +247,7 @@
         productoSelect.innerHTML = "";
         campanaSelect.innerHTML = "";
       
-        // 🔹 Reagregar placeholder a productoSelect
+        // 🔹 Reagregar placeholder a productoSelect (Esto asegura que los <select>: Muestran el placeholder desde el inicio ✔️ / Y lo restauran cuando el valor depende de la selección anterior ✔️
         const placeholderProducto = document.createElement("option");
         placeholderProducto.value = "";
         placeholderProducto.textContent = "Selecciona un producto";
@@ -254,7 +272,7 @@
         const prodID = productoSelect.value;
         campanaSelect.innerHTML = "";
       
-        // 🔹 Reagregar placeholder a campanaSelect
+        // 🔹 Reagregar placeholder a campanaSelect (Esto asegura que los <select>: Muestran el placeholder desde el inicio ✔️ / Y lo restauran cuando el valor depende de la selección anterior ✔️
         const placeholderCampana = document.createElement("option");
         placeholderCampana.value = "";
         placeholderCampana.textContent = "Selecciona una campaña";
