@@ -101,8 +101,52 @@
         document.body.style.display = "block";
       }
     });
+
+    // 🔧 Configuración básica del primer módulo Drag & Drop con Tweakpane
+    window.initTweakpane = function(canvasId) {
+      const pane = new Tweakpane.Pane({ title: `🎛️ Opciones ${canvasId}` });
+      const config = {
+        logo: 'Logo_A',
+        icono: 'Icono_A',
+        copy: 'Texto_A',
+      };
+      pane.addBinding(config, 'logo', {
+        options: {
+          'Logo_A': 'Logo_A',
+          'Logo_B': 'Logo_B',
+          'Logo_C': 'Logo_C',
+        },
+        label: '🪪 Logo',
+      });
+      pane.addBinding(config, 'icono', {
+        options: {
+          'Icono_A': 'Icono_A',
+          'Icono_B': 'Icono_B',
+          'Icono_C': 'Icono_C',
+        },
+        label: '🔘 Icono',
+      });
+      pane.addBinding(config, 'copy', {
+        options: {
+          'Texto_A': 'Texto_A',
+          'Texto_B': 'Texto_B',
+          'Texto_C': 'Texto_C',
+        },
+        label: '✍️ Copy',
+      });
+
+      // Aquí se podrían añadir listeners para aplicar cambios al canvas
+      pane.on('change', (ev) => {
+        console.log(`[${canvasId}]`, ev.presetKey, '➡️', ev.value);
+      });
+
+      // Añadir a la interfaz
+      const contenedor = document.getElementById(`panel_${canvasId}`);
+      if (contenedor) contenedor.appendChild(pane.element);
+    };
   </script>
 </head>
+  
 <body style="display:none">
   <!-- <h1>🧪 Omni Ads AI - TQ</h1> -->
   <h1><img src="Logo_TQ_Omni_Ads_AI_OMG.png" alt="Logo Omni Ads AI TQ..." style= "width: 600px; margin-left: 20px" /></h1>
