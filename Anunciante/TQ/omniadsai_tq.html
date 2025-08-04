@@ -283,7 +283,10 @@
       const audiencias = await fetch(`${jsonPath}audiencias.json`).then(r => r.json());
       const divAud = document.createElement("div");
       divAud.className = "form-section";
-      divAud.innerHTML = `<label><strong>🎯 Audiencia:</strong></label>`;
+      const tituloAud = document.createElement("div");
+      tituloAud.style.flexBasis = "100%";
+      tituloAud.innerHTML = `<strong>🎯 Audiencia:</strong>`;
+      divAud.appendChild(tituloAud);
 
       audiencias.forEach(aud => {
         const checkbox = document.createElement("input");
