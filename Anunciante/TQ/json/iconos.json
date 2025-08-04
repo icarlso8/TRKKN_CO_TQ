@@ -1,0 +1,25 @@
+[
+  {
+    "id": "icono_blanco",
+    "nombre": "Ícono Blanco",
+    "archivo": "icon_white.png",
+    "categoria": "salud",
+    "ubicacion": "superior_derecha",
+    "restringido_a": ["gastrofast_advanced"]
+  },
+  {
+    "id": "icono_negro",
+    "nombre": "Ícono Negro",
+    "archivo": "icon_black.png",
+    "categoria": "salud",
+    "ubicacion": "inferior_izquierda",
+    "restringido_a": ["gastrofast_advanced"]
+  },
+  {
+    "id": "icono_rojo",
+    "nombre": "Ícono Rojo",
+    "archivo": "icon_red.png",
+    "categoria": "salud",
+    "ubicacion": "inferior_izquierda",
+    "restringido_a": ["gastrofast_advanced"]
+]
