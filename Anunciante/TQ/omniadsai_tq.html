@@ -119,7 +119,7 @@
     
       // LOGOS
       pane.addBlade({
-        view: 'list',
+        view: 'dropdown',
         label: '🪪 Logo',
         options: logos.map(l => ({ text: l.nombre, value: l.id }))
       }).on('change', ev => {
@@ -129,7 +129,7 @@
     
       // ICONOS
       pane.addBlade({
-        view: 'list',
+        view: 'dropdown',
         label: '🔘 Icono',
         options: iconos.map(i => ({ text: i.nombre, value: i.id }))
       }).on('change', ev => {
@@ -139,7 +139,7 @@
     
       // COPIES
       pane.addBlade({
-        view: 'list',
+        view: 'dropdown',
         label: '✍️ Copy',
         options: copies.map(c => ({ text: c.texto.slice(0, 40), value: c.id }))
       }).on('change', ev => {
@@ -149,7 +149,7 @@
     
       // COPY PERSONALIZADO
       pane.addBlade({
-        view: 'text',
+        view: 'dropdown',
         label: '🆕 Copy libre',
         value: ''
       }).on('change', ev => {
