@@ -90,10 +90,18 @@
 </head>
 <body style="display:none">
   <h1>🧪 Omni Ads AI - TQ</h1>
-  <form id="formulario">
-    <!-- Aquí irán las secciones cargadas desde los JSON dinámicamente -->
-  </form>
-  <div class="canvas-wrapper" id="canvasContainer"></div>
+
+  <div class="layout-container">
+    <div class="left-panel">
+      <form id="formulario">
+        <!-- Aquí irán las secciones cargadas desde los JSON dinámicamente -->
+      </form>
+    </div>
+    <div class="right-panel" id="canvasContainer">
+      <!-- Aquí se insertarán los canvas -->
+    </div>
+  </div>
+  
   <script>
     // Aquí cargaremos los JSON y generaremos el formulario
     // + render de canvas por tamaño
