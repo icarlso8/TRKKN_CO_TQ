@@ -1,0 +1,15 @@
+[
+  {
+    "id": "momento",
+    "nombre": "Momento del día",
+    "emoji": "🕒",
+    "tipo": "checkbox",
+    "opciones": [
+      { "id": "dia", "nombre": "Día", "emoji": "🌞" },
+      { "id": "noche", "nombre": "Noche", "emoji": "🌙" }
+    ]
+  }
+]
+
+
+
