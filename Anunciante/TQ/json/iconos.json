@@ -22,4 +22,5 @@
     "categoria": "salud",
     "ubicacion": "inferior_izquierda",
     "restringido_a": ["gastrofast_advanced"]
+  }
 ]
