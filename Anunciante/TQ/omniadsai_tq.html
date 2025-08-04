@@ -59,6 +59,7 @@
       max-width: 260px;
       color: #000;
       background-color: #fff;
+    } 
     .label-wrapper {
       display: flex;
       align-items: center;
@@ -139,19 +140,35 @@
         const div = document.createElement("div");
         div.className = "form-section";
       
+        const wrapper = document.createElement("div");
+        wrapper.className = "label-wrapper";
+      
         const label = document.createElement("label");
         label.setAttribute("for", id);
         label.innerHTML = `<strong>${data.label}:</strong>`;
       
         const select = document.createElement("select");
         select.id = id;
-        select.style.marginLeft = "8px"; // 👈 Separación {Campo}: 8px {Dropdown}
         elements[id] = select;
       
-        div.appendChild(label);
-        div.appendChild(select);
+        wrapper.appendChild(label);
+        wrapper.appendChild(select);
+        div.appendChild(wrapper);
         section.appendChild(div);
       
+        const placeholderText = `Selecciona un ${data.label.split(' ')[1].toLowerCase()}`;
+        select.appendChild(crearPlaceholder(placeholderText));
+      
+        if (data.opciones) {
+          data.opciones.forEach(opt => {
+            const option = document.createElement("option");
+            option.value = opt.id;
+            option.textContent = opt.nombre;
+            select.appendChild(option);
+          });
+        }
+      }
+
         const placeholderText = `Selecciona un ${data.label.split(' ')[1].toLowerCase()}`;
         select.appendChild(crearPlaceholder(placeholderText));
       
