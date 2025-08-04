@@ -156,7 +156,7 @@
         div.appendChild(wrapper);
         section.appendChild(div);
       
-        const placeholderText = `Selecciona un ${data.label.split(' ')[1].toLowerCase()}`;
+        const placeholderText = `Selecciona ${data.label.split(' ')[1].toLowerCase()}`;
         select.appendChild(crearPlaceholder(placeholderText));
       
         if (data.opciones) {
@@ -184,9 +184,9 @@
         elements.producto.innerHTML = "";
         elements.campana.innerHTML = "";
 
-        elements.negocio.appendChild(crearPlaceholder("Selecciona un negocio/marca"));
-        elements.producto.appendChild(crearPlaceholder("Selecciona un producto"));
-        elements.campana.appendChild(crearPlaceholder("Selecciona una campaña"));
+        elements.negocio.appendChild(crearPlaceholder("Selecciona negocio/marca"));
+        elements.producto.appendChild(crearPlaceholder("Selecciona producto"));
+        elements.campana.appendChild(crearPlaceholder("Selecciona campaña"));
 
         if (negocios[segID]) {
           negocios[segID].forEach(n => {
@@ -204,8 +204,8 @@
         elements.producto.innerHTML = "";
         elements.campana.innerHTML = "";
 
-        elements.producto.appendChild(crearPlaceholder("Selecciona un producto"));
-        elements.campana.appendChild(crearPlaceholder("Selecciona una campaña"));
+        elements.producto.appendChild(crearPlaceholder("Selecciona producto"));
+        elements.campana.appendChild(crearPlaceholder("Selecciona campaña"));
 
         if (productos[segID]?.[negID]) {
           productos[segID][negID].forEach(p => {
@@ -222,7 +222,7 @@
         const negID = elements.negocio.value;
         const prodID = elements.producto.value;
         elements.campana.innerHTML = "";
-        elements.campana.appendChild(crearPlaceholder("Selecciona una campaña"));
+        elements.campana.appendChild(crearPlaceholder("Selecciona un campaña"));
 
         if (campañas[segID]?.[negID]?.[prodID]) {
           campañas[segID][negID][prodID].forEach(c => {
