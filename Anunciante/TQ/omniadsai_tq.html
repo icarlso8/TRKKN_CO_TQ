@@ -114,9 +114,9 @@
       contenedor.appendChild(pane.element);
     
       const [logos, iconos, copies] = await Promise.all([
-        fetch("Anunciante/TQ/json/logos.json").then(r => r.json()),
-        fetch("Anunciante/TQ/json/iconos.json").then(r => r.json()),
-        fetch("Anunciante/TQ/json/copies.json").then(r => r.json())
+        fetch("json/logos.json").then(r => r.json()),
+        fetch("json/iconos.json").then(r => r.json()),
+        fetch("json/copies.json").then(r => r.json())
       ]);
     
       // LOGOS
