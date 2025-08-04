@@ -48,6 +48,25 @@
       font-size: 1.1em;
       padding: 0 10px;
     }
+    .layout-container {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    
+    .left-panel {
+      flex: 1;
+    }
+    
+    .right-panel {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .right-panel > div {
+      flex: 1 1 300px;
+    }
   </style>
   
   <script type="module">
