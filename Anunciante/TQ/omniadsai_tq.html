@@ -203,7 +203,15 @@
         negocioSelect.innerHTML = "";
         productoSelect.innerHTML = "";
         campanaSelect.innerHTML = "";
-  
+      
+        // 🔹 Reagregar placeholder a negocioSelect
+        const placeholderNegocio = document.createElement("option");
+        placeholderNegocio.value = "";
+        placeholderNegocio.textContent = "Selecciona un negocio/marca";
+        placeholderNegocio.disabled = true;
+        placeholderNegocio.selected = true;
+        negocioSelect.appendChild(placeholderNegocio);
+
         if (negocios[segID]) {
           negocios[segID].forEach(n => {
             const opt = document.createElement("option");
@@ -220,7 +228,15 @@
         const negID = negocioSelect.value;
         productoSelect.innerHTML = "";
         campanaSelect.innerHTML = "";
-  
+      
+        // 🔹 Reagregar placeholder a productoSelect
+        const placeholderProducto = document.createElement("option");
+        placeholderProducto.value = "";
+        placeholderProducto.textContent = "Selecciona un producto";
+        placeholderProducto.disabled = true;
+        placeholderProducto.selected = true;
+        productoSelect.appendChild(placeholderProducto);
+
         if (productos[segID] && productos[segID][negID]) {
           productos[segID][negID].forEach(p => {
             const opt = document.createElement("option");
@@ -237,6 +253,14 @@
         const negID = negocioSelect.value;
         const prodID = productoSelect.value;
         campanaSelect.innerHTML = "";
+      
+        // 🔹 Reagregar placeholder a campanaSelect
+        const placeholderCampana = document.createElement("option");
+        placeholderCampana.value = "";
+        placeholderCampana.textContent = "Selecciona una campaña";
+        placeholderCampana.disabled = true;
+        placeholderCampana.selected = true;
+        campanaSelect.appendChild(placeholderCampana);
   
         if (campañas[segID] && campañas[segID][negID] && campañas[segID][negID][prodID]) {
           campañas[segID][negID][prodID].forEach(c => {
