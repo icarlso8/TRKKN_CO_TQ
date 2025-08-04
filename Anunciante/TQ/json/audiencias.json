@@ -1,9 +1,0 @@
-[
-  { "id": "embarazadas", "nombre": "Embarazadas", "emoji": "🤰" },
-  { "id": "oficinistas", "nombre": "Oficinistas", "emoji": "💼" },
-  { "id": "universitarios", "nombre": "Universitarios", "emoji": "🎓" },
-  { "id": "adulto_mayor", "nombre": "Adulto mayor", "emoji": "👵" },
-  { "id": "conductores", "nombre": "Conductores/Repartidores", "emoji": "🚚" },
-  { "id": "medicados", "nombre": "Medicados", "emoji": "😷" },
-  { "id": "foodies", "nombre": "Foodies", "emoji": "🍔" }
-]
