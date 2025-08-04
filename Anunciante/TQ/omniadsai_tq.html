@@ -92,7 +92,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
-    .form-section.audiencias-opciones {
+    .form-section.checkbox-opciones {
       margin-left: 24px;
     }
   </style>
@@ -291,7 +291,7 @@
       
       // Opciones de audiencia con sangría
       const divAud = document.createElement("div");
-      divAud.className = "form-section audiencias-opciones";
+      divAud.className = "form-section checkbox-opciones";
 
       audiencias.forEach(aud => {
         const checkbox = document.createElement("input");
@@ -320,7 +320,7 @@
       
         // Opciones con sangría
         const divOpciones = document.createElement("div");
-        divOpciones.className = "form-section audiencias-opciones";
+        divOpciones.className = "form-section checkbox-opciones";
       
         if (factor.tipo === "checkbox") {
           factor.opciones.forEach(op => {
