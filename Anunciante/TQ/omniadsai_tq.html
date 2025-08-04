@@ -172,9 +172,24 @@
       // Descripción
       const descripcionSection = document.createElement("div");
       descripcionSection.className = "form-section";
-      descripcionSection.innerHTML = `
-        <label for="descripcion"><strong>📝 Descripción:</strong></label>
-        <textarea id="descripcion" name="descripcion" rows="3" style="width: 100%;" placeholder="Escribe detalles clave sobre el producto, campaña, temporada, lenguaje, expresiones, etc."></textarea>`;
+      
+      const descripcionWrapper = document.createElement("div");
+      descripcionWrapper.className = "label-wrapper";
+      
+      const label = document.createElement("label");
+      label.setAttribute("for", "descripcion");
+      label.innerHTML = `<strong>📝 Descripción:</strong>`;
+      
+      const textarea = document.createElement("textarea");
+      textarea.id = "descripcion";
+      textarea.name = "descripcion";
+      textarea.rows = 3;
+      textarea.placeholder = "Escribe detalles clave sobre el producto, campaña, temporada, tendencias, etc.";
+      textarea.style.width = "100%";
+      
+      descripcionWrapper.appendChild(label);
+      descripcionWrapper.appendChild(textarea);
+      descripcionSection.appendChild(descripcionWrapper);
       section.appendChild(descripcionSection);
 
       // Cascadas
