@@ -169,19 +169,6 @@
         }
       }
 
-        const placeholderText = `Selecciona un ${data.label.split(' ')[1].toLowerCase()}`;
-        select.appendChild(crearPlaceholder(placeholderText));
-      
-        if (data.opciones) {
-          data.opciones.forEach(opt => {
-            const option = document.createElement("option");
-            option.value = opt.id;
-            option.textContent = opt.nombre;
-            select.appendChild(option);
-          });
-        }
-      }
-
       // Descripción
       const descripcionSection = document.createElement("div");
       descripcionSection.className = "form-section";
