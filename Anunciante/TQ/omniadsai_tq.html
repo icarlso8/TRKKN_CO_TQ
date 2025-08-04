@@ -427,7 +427,20 @@
         wrapper.appendChild(checkbox);
         wrapper.appendChild(label);
         wrapper.appendChild(canvas);
+
+        // ✅ Aquí agregamos el contenedor para Tweakpane
+        const panelDiv = document.createElement("div");
+        panelDiv.id = `panel_${t.id}`;
+        panelDiv.style.marginTop = "12px";
+        panelDiv.style.borderTop = "1px dashed #ccc";
+        panelDiv.style.paddingTop = "12px";
+        wrapper.appendChild(panelDiv);
+        
+        // ⏬ Esta línea se mantiene
         canvasContainer.appendChild(wrapper);
+
+        // ✅ Finalmente, inicializa Tweakpane
+        window.initTweakpane(t.id);
     
         const fabricCanvas = new fabric.Canvas(canvas.id, {
           backgroundColor: "#ffffff",
@@ -452,6 +465,35 @@
       await cargarAudienciaFactores();
       await cargarTamanosYCanvas();
 });
+
+    function agregarElementoAlCanvas(item, tipo, canvasID) {
+      const canvas = window.canvasRefs[canvasID].canvas;
+      fabric.Image.fromURL(`Anunciante/TQ/assets/${tipo === 'logo' ? 'logos' : 'iconos'}/${item.archivo}`, img => {
+        img.set({
+          left: 50,
+          top: 50,
+          scaleX: 0.3,
+          scaleY: 0.3,
+          selectable: true,
+          hasControls: true
+        });
+        canvas.add(img);
+      });
+    }
+    
+    function agregarTextoAlCanvas(copy, canvasID) {
+      const canvas = window.canvasRefs[canvasID].canvas;
+      const text = new fabric.Textbox(copy.texto, {
+        left: 50,
+        top: 50,
+        fontSize: 18,
+        fill: '#000',
+        fontFamily: 'Mulish',
+        selectable: true
+      });
+      canvas.add(text);
+    }
+
   </script>
 </body>
 </html>
