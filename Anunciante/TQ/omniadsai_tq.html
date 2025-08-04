@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Omni Ads AI - TQ</title>
+  <title>OmniAdsAI_TQ</title>
   <link rel="icon" href="../../assets/TRKKN_icon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/tweakpane@4.0.1/dist/tweakpane.min.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <style>
     body {
@@ -81,382 +80,246 @@
       }
     });
   </script>
+  
 </head>
   
 <body style="display:none">
-  <!-- <h1>🧪 Omni Ads AI - TQ</h1> -->
   <h1><img src="Logo_TQ_OmniAdsAI_TRKKN.png" alt="Cargando Logo TQ OmniAdsAI TRKKN..." style= "width: 400px; margin-left: 20px" /></h1>
-  <form id="formulario">
-    <!-- Aquí irán las secciones cargadas desde los JSON dinámicamente -->
-  </form>
+  <form id="formulario"></form>
   <div class="canvas-wrapper" id="canvasContainer"></div>
   <script>
-    // Aquí cargaremos los JSON y generaremos el formulario
-    // + render de canvas por tamaño
-    // + integración con Tweakpane y fabric.js
-    // Este bloque lo completaré en el siguiente paso
+    
+    function crearPlaceholder(texto) {
+      const opt = document.createElement("option");
+      opt.value = "";
+      opt.textContent = texto;
+      opt.disabled = true;
+      opt.selected = true;
+      return opt;
+    }
+
     async function cargarJerarquia() {
       const jsonPath = "../../Anunciante/TQ/json/";
       const form = document.getElementById("formulario");
-      
-      const sectionJerarquia = document.createElement("fieldset");
-      sectionJerarquia.className = "form-group";
-      const legendJerarquia = document.createElement("legend");
-      legendJerarquia.innerHTML = "📋 Información del producto";
-      sectionJerarquia.appendChild(legendJerarquia);
-      form.appendChild(sectionJerarquia);
 
-      const segmentos = await fetch(`${jsonPath}segmentos.json`).then(r => r.json());
-      const negocios = await fetch(`${jsonPath}negocios.json`).then(r => r.json());
-      const productos = await fetch(`${jsonPath}productos.json`).then(r => r.json());
-      const campañas = await fetch(`${jsonPath}campañas.json`).then(r => r.json());
-  
-      // ========== SEGMENTO ==========
-      const segmentoSection = document.createElement("div");
-      segmentoSection.className = "form-section";
-      const segmentoLabel = document.createElement("label");
-      segmentoLabel.innerHTML = "<strong>🏭 Segmento:</strong>";
-      const segmentoSelect = document.createElement("select");
-      segmentoSelect.id = "segmento";
-      segmentoLabel.appendChild(segmentoSelect);
-      segmentoSection.appendChild(segmentoLabel);
-      sectionJerarquia.appendChild(segmentoSection);
+      const section = document.createElement("fieldset");
+      section.className = "form-group";
+      section.innerHTML = `<legend>📋 Información del producto</legend>`;
+      form.appendChild(section);
 
-      // 🔸 Placeholder
-      const placeholder = document.createElement("option");
-      placeholder.value = "";
-      placeholder.textContent = "Selecciona un segmento";
-      placeholder.disabled = true;
-      placeholder.selected = true;
-      segmentoSelect.appendChild(placeholder);
-  
-      segmentos.forEach(s => {
-        const opt = document.createElement("option");
-        opt.value = s.id;
-        opt.textContent = s.nombre;
-        segmentoSelect.appendChild(opt);
-      });
-  
-      // ========== NEGOCIO ==========
-      const negocioSection = document.createElement("div");
-      negocioSection.className = "form-section";
-      const negocioLabel = document.createElement("label");
-      negocioLabel.innerHTML = "<strong>🧪 Negocio/Marca:</strong>";
-      const negocioSelect = document.createElement("select"); // ✅ ahora sí existe
-      negocioSelect.id = "negocio";
-      
-      // 🔸 Placeholder
-      const placeholderNegocio = document.createElement("option");
-      placeholderNegocio.value = "";
-      placeholderNegocio.textContent = "Selecciona una negocio/marca";
-      placeholderNegocio.disabled = true;
-      placeholderNegocio.selected = true;
-      negocioSelect.appendChild(placeholderNegocio);
-      
-      negocioLabel.appendChild(negocioSelect);
-      negocioSection.appendChild(negocioLabel);
-      sectionJerarquia.appendChild(negocioSection);
-  
-      // ========== PRODUCTO ==========
-      const productoSection = document.createElement("div");
-      productoSection.className = "form-section";
-      const productoLabel = document.createElement("label");
-      productoLabel.innerHTML = "<strong>💊 Producto:</strong>";
-      const productoSelect = document.createElement("select");
-      productoSelect.id = "producto";
+      const [segmentos, negocios, productos, campañas] = await Promise.all([
+        fetch(`${jsonPath}segmentos.json`).then(r => r.json()),
+        fetch(`${jsonPath}negocios.json`).then(r => r.json()),
+        fetch(`${jsonPath}productos.json`).then(r => r.json()),
+        fetch(`${jsonPath}campañas.json`).then(r => r.json())
+      ]);
 
-      // 🔸 Placeholder
-      const placeholderProducto = document.createElement("option");
-      placeholderProducto.value = "";
-      placeholderProducto.textContent = "Selecciona un producto";
-      placeholderProducto.disabled = true;
-      placeholderProducto.selected = true;
-      productoSelect.appendChild(placeholderProducto);
+      const selects = {
+        segmento: { label: "🏭 Segmento", opciones: segmentos },
+        negocio: { label: "🧪 Negocio/Marca" },
+        producto: { label: "💊 Producto" },
+        campana: { label: "📣 Campaña" }
+      };
 
-      productoLabel.appendChild(productoSelect);
-      productoSection.appendChild(productoLabel);
-      sectionJerarquia.appendChild(productoSection);
-  
-      // ========== CAMPAÑA ==========
-      const campanaSection = document.createElement("div");
-      campanaSection.className = "form-section";
-      const campanaLabel = document.createElement("label");
-      campanaLabel.innerHTML = "<strong>📣 Campaña:</strong>";
-      const campanaSelect = document.createElement("select");
-      campanaSelect.id = "campana";
+      const elements = {};
 
-      // 🔸 Placeholder
-      const placeholderCampana = document.createElement("option");
-      placeholderCampana.value = "";
-      placeholderCampana.textContent = "Selecciona una campaña";
-      placeholderCampana.disabled = true;
-      placeholderCampana.selected = true;
-      campanaSelect.appendChild(placeholderCampana);
+      for (const [id, data] of Object.entries(selects)) {
+        const div = document.createElement("div");
+        div.className = "form-section";
 
-      campanaLabel.appendChild(campanaSelect);
-      campanaSection.appendChild(campanaLabel);
-      sectionJerarquia.appendChild(campanaSection);
+        const label = document.createElement("label");
+        label.innerHTML = `<strong>${data.label}:</strong>`;
 
-      // ========== DESCRIPCIÓN ==========
+        const select = document.createElement("select");
+        select.id = id;
+        label.appendChild(select);
+        div.appendChild(label);
+        section.appendChild(div);
+        elements[id] = select;
+
+        const placeholderText = `Selecciona un ${data.label.split(' ')[1].toLowerCase()}`;
+        select.appendChild(crearPlaceholder(placeholderText));
+
+        if (data.opciones) {
+          data.opciones.forEach(opt => {
+            const option = document.createElement("option");
+            option.value = opt.id;
+            option.textContent = opt.nombre;
+            select.appendChild(option);
+          });
+        }
+      }
+
+      // Descripción
       const descripcionSection = document.createElement("div");
       descripcionSection.className = "form-section";
-      
-      const descripcionLabel = document.createElement("label");
-      descripcionLabel.setAttribute("for", "descripcion");
-      descripcionLabel.innerHTML = "<strong>📝 Descripción:</strong>";
-      
-      const descripcionInput = document.createElement("textarea");
-      descripcionInput.id = "descripcion";
-      descripcionInput.name = "descripcion";
-      descripcionInput.rows = 3;
-      descripcionInput.style.width = "100%";
-      descripcionInput.placeholder = "Escribe detalles clave sobre el producto, campaña, temporada, lenguaje, expresiones, etc.";
-      
-      descripcionSection.appendChild(descripcionLabel);
-      descripcionSection.appendChild(descripcionInput);
-      sectionJerarquia.appendChild(descripcionSection);
+      descripcionSection.innerHTML = `
+        <label for="descripcion"><strong>📝 Descripción:</strong></label>
+        <textarea id="descripcion" name="descripcion" rows="3" style="width: 100%;" placeholder="Escribe detalles clave sobre el producto, campaña, temporada, lenguaje, expresiones, etc."></textarea>`;
+      section.appendChild(descripcionSection);
 
-      // Eventos en cascada
-      segmentoSelect.addEventListener("change", () => {
-        const segID = segmentoSelect.value;
-        negocioSelect.innerHTML = "";
-        productoSelect.innerHTML = "";
-        campanaSelect.innerHTML = "";
-      
-        // 🔹 Reagregar placeholder a negocioSelect (Esto asegura que los <select>: Muestran el placeholder desde el inicio ✔️ / Y lo restauran cuando el valor depende de la selección anterior ✔️
-        const placeholderNegocio = document.createElement("option");
-        placeholderNegocio.value = "";
-        placeholderNegocio.textContent = "Selecciona un negocio/marca";
-        placeholderNegocio.disabled = true;
-        placeholderNegocio.selected = true;
-        negocioSelect.appendChild(placeholderNegocio);
+      // Cascadas
+      elements.segmento.addEventListener("change", () => {
+        const segID = elements.segmento.value;
+        elements.negocio.innerHTML = "";
+        elements.producto.innerHTML = "";
+        elements.campana.innerHTML = "";
 
-        const placeholderProducto = document.createElement("option");
-        placeholderProducto.value = "";
-        placeholderProducto.textContent = "Selecciona un producto";
-        placeholderProducto.disabled = true;
-        placeholderProducto.selected = true;
-        productoSelect.appendChild(placeholderProducto);
-      
-        const placeholderCampana = document.createElement("option");
-        placeholderCampana.value = "";
-        placeholderCampana.textContent = "Selecciona una campaña";
-        placeholderCampana.disabled = true;
-        placeholderCampana.selected = true;
-        campanaSelect.appendChild(placeholderCampana);
+        elements.negocio.appendChild(crearPlaceholder("Selecciona un negocio/marca"));
+        elements.producto.appendChild(crearPlaceholder("Selecciona un producto"));
+        elements.campana.appendChild(crearPlaceholder("Selecciona una campaña"));
 
         if (negocios[segID]) {
           negocios[segID].forEach(n => {
             const opt = document.createElement("option");
             opt.value = n.id;
             opt.textContent = n.nombre;
-            negocioSelect.appendChild(opt);
+            elements.negocio.appendChild(opt);
           });
-          negocioSelect.dispatchEvent(new Event("change"));
         }
       });
-  
-      negocioSelect.addEventListener("change", () => {
-        const segID = segmentoSelect.value;
-        const negID = negocioSelect.value;
-        productoSelect.innerHTML = "";
-        campanaSelect.innerHTML = "";
-      
-        // 🔹 Reagregar placeholder a productoSelect (Esto asegura que los <select>: Muestran el placeholder desde el inicio ✔️ / Y lo restauran cuando el valor depende de la selección anterior ✔️
-        const placeholderProducto = document.createElement("option");
-        placeholderProducto.value = "";
-        placeholderProducto.textContent = "Selecciona un producto";
-        placeholderProducto.disabled = true;
-        placeholderProducto.selected = true;
-        productoSelect.appendChild(placeholderProducto);
 
-        // 🔹 Reagregar placeholder a productoSelect (Esto asegura que los <select>: Muestran el placeholder desde el inicio ✔️ / Y lo restauran cuando el valor depende de la selección anterior ✔️
-        const placeholderCampana = document.createElement("option");
-        placeholderCampana.value = "";
-        placeholderCampana.textContent = "Selecciona una campaña";
-        placeholderCampana.disabled = true;
-        placeholderCampana.selected = true;
-        campanaSelect.appendChild(placeholderCampana);
+      elements.negocio.addEventListener("change", () => {
+        const segID = elements.segmento.value;
+        const negID = elements.negocio.value;
+        elements.producto.innerHTML = "";
+        elements.campana.innerHTML = "";
 
-        // ✅ Solo continuar si hay negocio seleccionado
-        if (!negID) return;
+        elements.producto.appendChild(crearPlaceholder("Selecciona un producto"));
+        elements.campana.appendChild(crearPlaceholder("Selecciona una campaña"));
 
-        if (productos[segID] && productos[segID][negID]) {
+        if (productos[segID]?.[negID]) {
           productos[segID][negID].forEach(p => {
             const opt = document.createElement("option");
             opt.value = p.id;
             opt.textContent = p.nombre;
-            productoSelect.appendChild(opt);
+            elements.producto.appendChild(opt);
           });
-          productoSelect.dispatchEvent(new Event("change"));
         }
       });
-  
-      productoSelect.addEventListener("change", () => {
-        const segID = segmentoSelect.value;
-        const negID = negocioSelect.value;
-        const prodID = productoSelect.value;
-        campanaSelect.innerHTML = "";
-      
-        // 🔹 Reagregar placeholder a campanaSelect (Esto asegura que los <select>: Muestran el placeholder desde el inicio ✔️ / Y lo restauran cuando el valor depende de la selección anterior ✔️
-        const placeholderCampana = document.createElement("option");
-        placeholderCampana.value = "";
-        placeholderCampana.textContent = "Selecciona una campaña";
-        placeholderCampana.disabled = true;
-        placeholderCampana.selected = true;
-        campanaSelect.appendChild(placeholderCampana);
-  
-        if (campañas[segID] && campañas[segID][negID] && campañas[segID][negID][prodID]) {
+
+      elements.producto.addEventListener("change", () => {
+        const segID = elements.segmento.value;
+        const negID = elements.negocio.value;
+        const prodID = elements.producto.value;
+        elements.campana.innerHTML = "";
+        elements.campana.appendChild(crearPlaceholder("Selecciona una campaña"));
+
+        if (campañas[segID]?.[negID]?.[prodID]) {
           campañas[segID][negID][prodID].forEach(c => {
             const opt = document.createElement("option");
             opt.value = c.id;
             opt.textContent = c.nombre;
-            campanaSelect.appendChild(opt);
+            elements.campana.appendChild(opt);
           });
         }
       });
-
-      // Reagregar los placeholders iniciales antes del primer disparo en cascada
-      const placeholderProductoInicial = document.createElement("option");
-      placeholderProductoInicial.value = "";
-      placeholderProductoInicial.textContent = "Selecciona un producto";
-      placeholderProductoInicial.disabled = true;
-      placeholderProductoInicial.selected = true;
-      productoSelect.appendChild(placeholderProductoInicial);
-
-      /*
-      const placeholderCampanaInicial = document.createElement("option");
-      placeholderCampanaInicial.value = "";
-      placeholderCampanaInicial.textContent = "Selecciona una campaña";
-      placeholderCampanaInicial.disabled = true;
-      placeholderCampanaInicial.selected = true;
-      campanaSelect.appendChild(placeholderCampanaInicial); */
-  
-      // No disparar la cascada automáticamente para preservar los placeholders iniciales
-      // segmentoSelect.dispatchEvent(new Event("change"));
-
     }
-
+    
     async function cargarAudienciaFactores() {
       const jsonPath = "../../Anunciante/TQ/json/";
       const form = document.getElementById("formulario");
-    
-      const sectionContexto = document.createElement("fieldset");
-      sectionContexto.className = "form-group";
-      const legend = document.createElement("legend");
-      legend.innerHTML = "🌐 Audiencia (Factores Contextuales)";
-      sectionContexto.appendChild(legend);
-      form.appendChild(sectionContexto);
-    
-      // 🔹 AUDIENCIAS
+
+      const section = document.createElement("fieldset");
+      section.className = "form-group";
+      section.innerHTML = `<legend>🌐 Audiencia (Factores Contextuales)</legend>`;
+      form.appendChild(section);
+
       const audiencias = await fetch(`${jsonPath}audiencias.json`).then(r => r.json());
-      const audienciaSection = document.createElement("div");
-      audienciaSection.className = "form-section";
-    
-      const audienciaLabel = document.createElement("label");
-      audienciaLabel.innerHTML = "<strong>🎯 Audiencia:</strong>";
-      audienciaSection.appendChild(audienciaLabel);
-    
+      const divAud = document.createElement("div");
+      divAud.className = "form-section";
+      divAud.innerHTML = `<label><strong>🎯 Audiencia:</strong></label>`;
+
       audiencias.forEach(aud => {
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.name = "audiencia";
         checkbox.value = aud.id;
-    
+
         const span = document.createElement("span");
         span.textContent = ` ${aud.emoji || ""} ${aud.nombre}`;
-    
+
         const wrapper = document.createElement("label");
         wrapper.appendChild(checkbox);
         wrapper.appendChild(span);
         wrapper.style.marginRight = "16px";
-    
-        audienciaSection.appendChild(wrapper);
+        divAud.appendChild(wrapper);
       });
-    
-      sectionContexto.appendChild(audienciaSection);
-    
-      // 🔹 FACTORES CONTEXTUALES
+      section.appendChild(divAud);
+
       const factores = await fetch(`${jsonPath}factores.json`).then(r => r.json());
-    
       factores.forEach(factor => {
-        const section = document.createElement("div");
-        section.className = "form-section";
-    
-        const label = document.createElement("label");
-        label.innerHTML = `<strong>${factor.emoji} ${factor.nombre}:</strong>`;
-        section.appendChild(label);
-    
+        const div = document.createElement("div");
+        div.className = "form-section";
+        div.innerHTML = `<label><strong>${factor.emoji} ${factor.nombre}:</strong></label>`;
+
         if (factor.tipo === "checkbox") {
           factor.opciones.forEach(op => {
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.name = factor.id;
             checkbox.value = op.id;
-    
+
             const span = document.createElement("span");
             span.textContent = `${op.emoji || ""} ${op.nombre}`;
-    
+
             const wrapper = document.createElement("label");
             wrapper.appendChild(checkbox);
             wrapper.appendChild(span);
             wrapper.style.marginRight = "16px";
-    
-            section.appendChild(wrapper);
+
+            div.appendChild(wrapper);
           });
         }
-    
-        sectionContexto.appendChild(section);
+        section.appendChild(div);
       });
     }
 
     async function cargarTamanosYCanvas() {
       const jsonPath = "../../Anunciante/TQ/json/";
       const canvasContainer = document.getElementById("canvasContainer");
-    
+
       const tamanos = await fetch(`${jsonPath}tamaños.json`).then(r => r.json());
-    
       tamanos.forEach(t => {
         const wrapper = document.createElement("div");
         wrapper.style.display = "flex";
         wrapper.style.flexDirection = "column";
         wrapper.style.alignItems = "center";
         wrapper.style.marginBottom = "24px";
-    
-        // Checkbox para activar el tamaño
+
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.id = `check_${t.id}`;
         checkbox.checked = true;
         checkbox.style.marginBottom = "8px";
-    
+
         const label = document.createElement("label");
         label.setAttribute("for", checkbox.id);
         label.textContent = `🖼️ ${t.nombre}`;
         label.style.marginBottom = "8px";
         label.style.fontWeight = "bold";
-    
+
         const canvas = document.createElement("canvas");
         canvas.id = `canvas_${t.id}`;
         canvas.width = t.ancho;
         canvas.height = t.alto;
-    
+
         wrapper.appendChild(checkbox);
         wrapper.appendChild(label);
         wrapper.appendChild(canvas);
         canvasContainer.appendChild(wrapper);
-    
+
         const fabricCanvas = new fabric.Canvas(canvas.id, {
           backgroundColor: "#ffffff",
           selection: true
         });
-    
+
         if (!window.canvasRefs) window.canvasRefs = {};
         window.canvasRefs[t.id] = {
           canvas: fabricCanvas,
           activo: checkbox.checked
         };
-    
+
         checkbox.addEventListener("change", () => {
           window.canvasRefs[t.id].activo = checkbox.checked;
           canvas.style.opacity = checkbox.checked ? "1" : "0.3";
@@ -468,7 +331,7 @@
       await cargarJerarquia();
       await cargarAudienciaFactores();
       await cargarTamanosYCanvas();
-});
+    });
   </script>
 </body>
 </html>
