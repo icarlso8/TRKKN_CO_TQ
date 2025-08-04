@@ -1,0 +1,16 @@
+[
+  {
+    "id": "copy_rapidez",
+    "texto": "Actúa en minutos. Alivio rápido para tu estómago.",
+    "tono": "informativo",
+    "ubicacion": "centro",
+    "restringido_a": ["gastrofast_advanced"]
+  },
+  {
+    "id": "copy_conversacional",
+    "texto": "¿Gastro qué? ¡Gastrofast!",
+    "tono": "emocional",
+    "ubicacion": "centro_inferior",
+    "restringido_a": ["gastrofast_advanced"]
+  }
+]
