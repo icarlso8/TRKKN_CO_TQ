@@ -7,7 +7,11 @@
   <link rel="icon" href="../../assets/TRKKN_icon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/tweakpane@4.0.1/dist/tweakpane.min.umd.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/tweakpane@4.0.1/dist/tweakpane.min.umd.js"></script> se está usando Tweakpane como módulo UMD (.min.umd.js) pero tu script principal está definido como type="module", lo cual aisla el scope global y no expone Tweakpane directamente en window.-->
+  <script type="module">
+    import * as Tweakpane from "https://cdn.jsdelivr.net/npm/tweakpane@4.0.1/dist/tweakpane.min.js";
+    window.Tweakpane = Tweakpane;
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
   <style>
     body {
