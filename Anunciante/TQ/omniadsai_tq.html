@@ -142,6 +142,9 @@
 <body style="display:none">
   <h1><img src="Logo_TQ_OmniAdsAI_TRKKN.png" alt="Cargando Logo TQ OmniAdsAI TRKKN..." style= "width: 500px; margin-left: 20px" /></h1>
   <form id="formulario"></form>
+  <div style="margin-top: 20px;">
+    <button id="btnGenerar" style="padding: 10px 16px; font-weight: bold;">🎬 Generar creatividades</button>
+  </div>
   <div class="canvas-wrapper" id="canvasContainer"></div>
   <script>
     
@@ -502,6 +505,75 @@
       <button onclick="document.getElementById('modalIconos').style.display='none'" style="margin-top:10px;">Cerrar</button>
     </div>
   </div>
+
+  <script type="module">
+  import { generarCreatividadesConFondos } from "../../Anunciante/TQ/js/controlesCanvas.js";
+  
+  document.getElementById("btnGenerar").addEventListener("click", async () => {
+    const productoSelect = document.getElementById("producto");
+    const nombreProducto = productoSelect.options[productoSelect.selectedIndex]?.textContent || "producto";
+  
+    const audSeleccionadas = Array.from(document.querySelectorAll("input[name='audiencia']:checked")).map(a => a.value);
+    if (audSeleccionadas.length === 0) {
+      alert("Selecciona al menos una audiencia");
+      return;
+    }
+  
+    // Detectar factores contextuales
+    const factores = {};
+    const checkboxes = document.querySelectorAll("fieldset input[type='checkbox']");
+    checkboxes.forEach(cb => {
+      if (cb.checked && cb.name !== "audiencia") {
+        if (!factores[cb.name]) factores[cb.name] = [];
+        factores[cb.name].push(cb.value);
+      }
+    });
+  
+    const factoresClaves = Object.entries(factores);
+    if (factoresClaves.length === 0) {
+      alert("Selecciona al menos un factor contextual");
+      return;
+    }
+  
+    // Combinar todas las opciones seleccionadas
+    const combinaciones = [];
+  
+    for (const audienciaId of audSeleccionadas) {
+      for (const [factorId, opciones] of factoresClaves) {
+        for (const opcionId of opciones) {
+          combinaciones.push({ audienciaId, factorId, opcionId });
+        }
+      }
+    }
+  
+    // Recorrer los canvas activos
+    for (const [tamañoId, ref] of Object.entries(window.canvasRefs)) {
+      if (!ref.activo) continue;
+  
+      for (const combinacion of combinaciones) {
+        await generarCreatividadesConFondos(
+          ref.canvas,
+          combinacion.audienciaId,
+          combinacion.factorId,
+          combinacion.opcionId,
+          tamañoId,
+          nombreProducto,
+          (dataURL, nombreArchivo) => {
+            // Mostrar imagen generada como miniatura
+            const galeria = document.getElementById(ref.galeriaId);
+            const thumb = document.createElement("img");
+            thumb.src = dataURL;
+            thumb.className = "thumbnail-preview";
+            thumb.title = nombreArchivo;
+            galeria.appendChild(thumb);
+          }
+        );
+      }
+    }
+  
+    alert("🎉 Creatividades generadas correctamente.");
+  });
+  </script>
 
 </body>
 </html>
