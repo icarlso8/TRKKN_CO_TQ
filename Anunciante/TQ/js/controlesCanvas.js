@@ -89,7 +89,7 @@ export async function mostrarGaleriaLogos(canvas) {
   
   logos.forEach(logo => {
     const img = document.createElement("img");
-    img.src = "../../assets/logos/" + logo.nombreArchivo;
+    img.src = "../../Anunciante/TQ/assets/logos/" + logo.nombreArchivo;
     img.title = logo.nombre;
     img.style.width = "80px";
     img.style.cursor = "pointer";
