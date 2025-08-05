@@ -75,6 +75,36 @@ export function agregarThumbnail(canvas, galeriaId) {
   btnEliminar.title = "Eliminar miniatura";
   btnEliminar.onclick = () => thumb.remove();
 
+export async function mostrarGaleriaLogos(canvas) {
+  const contenedor = document.getElementById("galeriaLogos");
+  contenedor.innerHTML = ""; // Limpiar antes de renderizar
+  
+  const response = await fetch("../../Anunciante/TQ/json/logos.json");
+  const logos = await response.json();
+  
+  logos.forEach(logo => {
+    const img = document.createElement("img");
+    img.src = "../../assets/logos/" + logo.nombreArchivo;
+    img.title = logo.nombre;
+    img.style.width = "80px";
+    img.style.cursor = "pointer";
+    img.style.border = "1px solid #ccc";
+    img.style.borderRadius = "4px";
+    img.onclick = () => {
+      fabric.Image.fromURL(img.src, function(fabImg) {
+        fabImg.scaleToWidth(100);
+        fabImg.set({ left: 20, top: 20, hasBorders: true, hasControls: true });
+        canvas.add(fabImg).setActiveObject(fabImg);
+      });
+      document.getElementById("modalLogos").style.display = "none";
+    };
+  
+    contenedor.appendChild(img);
+  });
+  
+  document.getElementById("modalLogos").style.display = "flex";
+}
+
   thumb.appendChild(img);
   thumb.appendChild(btnEliminar);
   galeria.appendChild(thumb);
