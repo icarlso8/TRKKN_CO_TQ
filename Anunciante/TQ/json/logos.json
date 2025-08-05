@@ -33,5 +33,5 @@
     "archivo": "logo_gastrofast_v2.png",
     "ubicacion": "inferior_derecha",
     "restringido_a": ["gastrofast_advanced"]
-  },
+  }
 ]
