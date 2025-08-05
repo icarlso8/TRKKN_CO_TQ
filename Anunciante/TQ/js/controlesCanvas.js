@@ -139,3 +139,35 @@ export async function mostrarGaleriaIconos(canvas) {
 
   document.getElementById("modalIconos").style.display = "flex";
 }
+
+export async function generarCreatividadesConFondos(canvasOriginal, audienciaId, factorId, opcionId, tamañoId, nombreProducto, callback) {
+  const canvasTemp = new fabric.Canvas(null, {
+    width: canvasOriginal.width,
+    height: canvasOriginal.height
+  });
+
+  // Clonar el contenido del canvas original
+  canvasOriginal.clone((clon) => {
+    clon.getObjects().forEach(obj => canvasTemp.add(obj.clone()));
+
+    // Cargar imagen de fondo
+    const fondoUrl = `../../Anunciante/TQ/assets/fondos/${audienciaId}/${factorId}/${opcionId}/${tamañoId}/OmniAdsAI_TQ_${audienciaId}_${opcionId}_${tamañoId}_0001.png`;
+
+    fabric.Image.fromURL(fondoUrl, (fondoImg) => {
+      fondoImg.scaleToWidth(canvasTemp.width);
+      fondoImg.scaleToHeight(canvasTemp.height);
+      canvasTemp.setBackgroundImage(fondoImg, canvasTemp.renderAll.bind(canvasTemp));
+
+      // Render final y generar imagen base64
+      setTimeout(() => {
+        const dataURL = canvasTemp.toDataURL({ format: "png" });
+
+        const nombreCreatividad = `OmniAdsAI_TQ_${nombreProducto}_${audienciaId}_${factorId}_${opcionId}_${tamañoId}_0001.png`;
+
+        // Callback para agregar a la galería o ZIP
+        if (callback) callback(dataURL, nombreCreatividad);
+      }, 500);
+    }, { crossOrigin: 'anonymous' });
+  });
+}
+
