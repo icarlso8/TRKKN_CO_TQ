@@ -2,7 +2,7 @@
   {
     "id": "icono_farma_blanco",
     "nombre": "Ícono Farma Blanco",
-    "archivo": "icon_pharma_white.png",
+    "nombreArchivo": "icon_pharma_white.png",
     "categoria": "salud",
     "ubicacion": "superior_derecha",
     "restringido_a": ["gastrofast_advanced"]
@@ -10,7 +10,7 @@
   {
     "id": "icono_farma_negro",
     "nombre": "Ícono Farma Negro",
-    "archivo": "icon_pharma_black.png",
+    "nombreArchivo": "icon_pharma_black.png",
     "categoria": "salud",
     "ubicacion": "superior_derecha",
     "restringido_a": ["gastrofast_advanced"]
@@ -18,9 +18,10 @@
   {
     "id": "icono_farma_rojo",
     "nombre": "Ícono Farma Rojo",
-    "archivo": "icon_pharma_red.png",
+    "nombreArchivo": "icon_pharma_red.png",
     "categoria": "salud",
     "ubicacion": "superior_derecha",
     "restringido_a": ["gastrofast_advanced"]
   }
 ]
+
