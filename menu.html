@@ -34,13 +34,14 @@
       visibility: hidden; /* 🔒 Ocultar hasta autenticar */
     }
     h1 {
-      text-align: center;
       font-family: "Goldman", sans-serif;
       font-size: 24px;
       color: #fff;
       background: #000;
-      display: inline-block;
-      padding: 8px 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 20px;
       border-radius: 8px;
       text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
       box-shadow: 2px 2px 0 #DB0000;
@@ -105,15 +106,22 @@
     .menu-list li {
       list-style-position: inside;
     }
+    .header-title {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 
 <body>
-
-  <h1>
-    <img src="assets/TRKKN_icon.png" alt="TRKKN Logo" class="logo" />
-    _Proyectos en Desarrollo
-  </h1>
+  
+  <div class="header-title">
+    <h1>
+      <img src="assets/TRKKN_icon.png" alt="TRKKN Logo" class="logo" />
+      _Proyectos en Desarrollo
+    </h1>
+  </div>
 
   <div class="menu">
     <ul class="menu-list">
