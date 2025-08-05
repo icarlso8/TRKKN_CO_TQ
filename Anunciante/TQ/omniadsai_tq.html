@@ -507,72 +507,84 @@
   </div>
 
   <script type="module">
-  import { generarCreatividadesConFondos } from "../../Anunciante/TQ/js/controlesCanvas.js";
-  
-  document.getElementById("btnGenerar").addEventListener("click", async () => {
-    const productoSelect = document.getElementById("producto");
-    const nombreProducto = productoSelect.options[productoSelect.selectedIndex]?.textContent || "producto";
-  
-    const audSeleccionadas = Array.from(document.querySelectorAll("input[name='audiencia']:checked")).map(a => a.value);
-    if (audSeleccionadas.length === 0) {
-      alert("Selecciona al menos una audiencia");
-      return;
+    import { generarCreatividadesConFondos } from "../../Anunciante/TQ/js/controlesCanvas.js";
+
+    function obtenerValoresSeleccionados(name) {
+      return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
     }
-  
-    // Detectar factores contextuales
-    const factores = {};
-    const checkboxes = document.querySelectorAll("fieldset input[type='checkbox']");
-    checkboxes.forEach(cb => {
-      if (cb.checked && cb.name !== "audiencia") {
-        if (!factores[cb.name]) factores[cb.name] = [];
-        factores[cb.name].push(cb.value);
-      }
-    });
-  
-    const factoresClaves = Object.entries(factores);
-    if (factoresClaves.length === 0) {
-      alert("Selecciona al menos un factor contextual");
-      return;
+    
+    function obtenerFactorYOpciones() {
+      const factores = {};
+      const inputs = document.querySelectorAll('fieldset.form-group input[type="checkbox"]');
+      inputs.forEach(input => {
+        const nombre = input.name;
+        if (!factores[nombre]) factores[nombre] = [];
+        if (input.checked) factores[nombre].push(input.value);
+      });
+      return factores;
     }
-  
-    // Combinar todas las opciones seleccionadas
-    const combinaciones = [];
-  
-    for (const audienciaId of audSeleccionadas) {
-      for (const [factorId, opciones] of factoresClaves) {
-        for (const opcionId of opciones) {
-          combinaciones.push({ audienciaId, factorId, opcionId });
-        }
-      }
-    }
-  
-    // Recorrer los canvas activos
-    for (const [tamañoId, ref] of Object.entries(window.canvasRefs)) {
-      if (!ref.activo) continue;
-  
-      for (const combinacion of combinaciones) {
-        await generarCreatividadesConFondos(
-          ref.canvas,
-          combinacion.audienciaId,
-          combinacion.factorId,
-          combinacion.opcionId,
-          tamañoId,
-          nombreProducto,
-          (dataURL, nombreArchivo) => {
-            // Mostrar imagen generada como miniatura
-            const galeria = document.getElementById(ref.galeriaId);
-            const thumb = document.createElement("img");
-            thumb.src = dataURL;
-            thumb.className = "thumbnail-preview";
-            thumb.title = nombreArchivo;
-            galeria.appendChild(thumb);
+    
+    document.addEventListener("DOMContentLoaded", () => {
+      const btnGenerar = document.createElement("button");
+      btnGenerar.textContent = "🚀 Generar creatividades";
+      btnGenerar.style.marginTop = "20px";
+      btnGenerar.style.padding = "12px 20px";
+      btnGenerar.style.fontSize = "16px";
+      btnGenerar.style.fontWeight = "bold";
+      btnGenerar.style.borderRadius = "8px";
+      btnGenerar.style.backgroundColor = "#4CAF50";
+      btnGenerar.style.color = "#fff";
+      btnGenerar.style.border = "none";
+      btnGenerar.style.cursor = "pointer";
+    
+      document.body.appendChild(btnGenerar);
+    
+      btnGenerar.onclick = () => {
+        const audiencias = obtenerValoresSeleccionados("audiencia");
+        const factores = obtenerFactorYOpciones();
+        const productoSelect = document.getElementById("producto");
+        const nombreProducto = productoSelect?.value || "producto";
+    
+        const canvasRefs = window.canvasRefs;
+    
+        let total = 0;
+    
+        audiencias.forEach(audId => {
+          for (const factorId in factores) {
+            factores[factorId].forEach(opcionId => {
+              for (const tamañoId in canvasRefs) {
+                const ref = canvasRefs[tamañoId];
+                if (!ref.activo) continue;
+    
+                generarCreatividadesConFondos(
+                  ref.canvas,
+                  audId,
+                  factorId,
+                  opcionId,
+                  tamañoId,
+                  nombreProducto,
+                  (dataURL, nombreCreatividad) => {
+                    // Mostrar en consola
+                    console.log(`✅ Generada: ${nombreCreatividad}`);
+                    total++;
+    
+                    // También puedes mostrar miniatura si quieres aquí
+                    const thumb = document.createElement("img");
+                    thumb.src = dataURL;
+                    thumb.className = "thumbnail-preview";
+                    document.getElementById(ref.galeriaId).appendChild(thumb);
+                  }
+                );
+              }
+            });
           }
-        );
-      }
-    }
-  
-    alert("🎉 Creatividades generadas correctamente.");
-  });
+        });
+    
+        setTimeout(() => {
+          alert("🎉 Creatividades generadas correctamente.");
+        }, 2000);
+      };
+    });
   </script>
 
 </body>
