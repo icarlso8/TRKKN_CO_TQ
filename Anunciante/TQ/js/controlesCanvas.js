@@ -1,7 +1,7 @@
 
 // controlesCanvas.js
 export function agregarLogo(canvas) {
-  const imageUrl = "../../assets/logos/logo_ejemplo.png"; // Puedes cambiar esto dinámicamente después
+  const imageUrl = "../../assets/logos/logo_ejemplo.png"; // Puedes cambiar esto dinámicamente después, Remplazada por "export async function mostrarGaleriaLogos(canvas) {"
   fabric.Image.fromURL(imageUrl, function(img) {
     img.scaleToWidth(100);
     img.set({
@@ -15,7 +15,7 @@ export function agregarLogo(canvas) {
 }
 
 export function agregarIcono(canvas) {
-  const iconUrl = "../../assets/iconos/icono_ejemplo.png"; // Puedes cambiar esto dinámicamente después
+  const iconUrl = "../../assets/iconos/icono_ejemplo.png"; // Puedes cambiar esto dinámicamente después, Remplazada por "export async function mostrarGaleriaIconos(canvas) {"
   fabric.Image.fromURL(iconUrl, function(img) {
     img.scaleToWidth(60);
     img.set({
@@ -108,4 +108,34 @@ export async function mostrarGaleriaLogos(canvas) {
   });
   
   document.getElementById("modalLogos").style.display = "flex";
+}
+
+export async function mostrarGaleriaIconos(canvas) {
+  const contenedor = document.getElementById("galeriaIconos");
+  contenedor.innerHTML = ""; // Limpiar antes de renderizar
+
+  const response = await fetch("../../Anunciante/TQ/json/icons.json");
+  const iconos = await response.json();
+
+  iconos.forEach(icono => {
+    const img = document.createElement("img");
+    img.src = "../../Anunciante/TQ/assets/icons/" + icono.nombreArchivo;
+    img.title = icono.nombre;
+    img.style.width = "80px";
+    img.style.cursor = "pointer";
+    img.style.border = "1px solid #ccc";
+    img.style.borderRadius = "4px";
+    img.onclick = () => {
+      fabric.Image.fromURL(img.src, function(fabImg) {
+        fabImg.scaleToWidth(60);
+        fabImg.set({ left: 50, top: 50, hasBorders: true, hasControls: true });
+        canvas.add(fabImg).setActiveObject(fabImg);
+      });
+      document.getElementById("modalIconos").style.display = "none";
+    };
+
+    contenedor.appendChild(img);
+  });
+
+  document.getElementById("modalIconos").style.display = "flex";
 }
