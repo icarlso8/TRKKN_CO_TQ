@@ -95,6 +95,25 @@
     .form-section.checkbox-opciones {
       margin-left: 24px;
     }
+    .galeria-thumbs {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    .thumbnail-preview {
+      width: 60px;
+      height: auto;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: transform 0.2s;
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+    }
+    .thumbnail-preview:hover {
+      transform: scale(1.05);
+      border-color: #555;
+    }
   </style>
   
   <script type="module">
@@ -439,9 +458,15 @@
             controls.appendChild(btnIcono);
             controls.appendChild(btnTexto);
             controls.appendChild(btnLimpiar);
-  
-            // Añadir justo después del canvas
-            ref.canvas.wrapperEl.parentElement.appendChild(controls);
+
+            // Crear contenedor de miniaturas (galería)
+            const galeria = document.createElement("div");
+            galeria.className = "galeria-thumbs";
+            galeria.id = `galeria_${id}`;
+            ref.galeriaId = galeria.id; // Guarda el ID por si lo necesitas luego
+            
+            // Insertar la galería en el DOM
+            ref.canvas.wrapperEl.parentElement.appendChild(galeria);
           }
         }
       }, 200);
