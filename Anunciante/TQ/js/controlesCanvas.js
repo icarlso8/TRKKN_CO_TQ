@@ -76,3 +76,5 @@ function agregarThumbnail(canvas, canvasId) {
   thumb.appendChild(btnEliminar);
   galeria.appendChild(thumb);
 }
+
+export { agregarThumbnail };
