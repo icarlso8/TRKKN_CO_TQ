@@ -404,5 +404,48 @@
     });
   </script>
   <script type="module" src="../../Anunciante/TQ/js/controlesCanvas.js"></script>
+    <script type="module">
+    import { agregarLogo, agregarIcono, agregarTexto, limpiarCanvas } from "../../Anunciante/TQ/js/controlesCanvas.js";
+  
+    document.addEventListener("DOMContentLoaded", () => {
+      const intervalo = setInterval(() => {
+        if (window.canvasRefs) {
+          clearInterval(intervalo);
+  
+          for (const [id, ref] of Object.entries(window.canvasRefs)) {
+            const controls = document.createElement("div");
+            controls.style.display = "flex";
+            controls.style.gap = "10px";
+            controls.style.marginTop = "10px";
+            controls.style.marginBottom = "20px";
+  
+            const btnLogo = document.createElement("button");
+            btnLogo.textContent = "➕ Añadir logo";
+            btnLogo.onclick = () => agregarLogo(ref.canvas);
+  
+            const btnIcono = document.createElement("button");
+            btnIcono.textContent = "➕ Añadir ícono";
+            btnIcono.onclick = () => agregarIcono(ref.canvas);
+  
+            const btnTexto = document.createElement("button");
+            btnTexto.textContent = "📝 Añadir texto";
+            btnTexto.onclick = () => agregarTexto(ref.canvas);
+  
+            const btnLimpiar = document.createElement("button");
+            btnLimpiar.textContent = "🧽 Limpiar";
+            btnLimpiar.onclick = () => limpiarCanvas(ref.canvas);
+  
+            controls.appendChild(btnLogo);
+            controls.appendChild(btnIcono);
+            controls.appendChild(btnTexto);
+            controls.appendChild(btnLimpiar);
+  
+            // Añadir justo después del canvas
+            ref.canvas.wrapperEl.parentElement.appendChild(controls);
+          }
+        }
+      }, 200);
+    });
+  </script>
 </body>
 </html>
