@@ -17,10 +17,18 @@
       height: 100vh;
       font-family: 'Mulish', sans-serif;
     }
+
     .loader {
-      /* width: 180px; */
-      /* width: 300px; */
-      width: 600px;
+      width: 80%;
+      max-width: 400px;
+      height: auto;
+    }
+
+    @media (max-width: 480px) {
+      .loader {
+        width: 90%;
+        max-width: 280px;
+      }
     }
   </style>
 </head>
