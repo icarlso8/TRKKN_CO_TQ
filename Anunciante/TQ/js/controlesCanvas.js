@@ -46,10 +46,13 @@ export function limpiarCanvas(canvas) {
   canvas.renderAll();
 }
 
-function agregarThumbnail(canvas, canvasId) {
+export function agregarThumbnail(canvas, galeriaId) {
   canvas.discardActiveObject().renderAll();
   const dataURL = canvas.toDataURL({ format: "png" });
-  const galeria = document.getElementById(`galeria_${canvasId}`);
+
+  const galeria = document.getElementById(galeriaId);
+  if (!galeria) return;
+
   const thumb = document.createElement("div");
   thumb.style.position = "relative";
 
@@ -76,5 +79,3 @@ function agregarThumbnail(canvas, canvasId) {
   thumb.appendChild(btnEliminar);
   galeria.appendChild(thumb);
 }
-
-export { agregarThumbnail };
