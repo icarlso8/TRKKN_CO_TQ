@@ -425,7 +425,7 @@
     });
   </script>
     <script type="module">
-    import { mostrarGaleriaLogos, agregarIcono, agregarTexto, limpiarCanvas, agregarThumbnail } from "../../Anunciante/TQ/js/controlesCanvas.js";
+    import { mostrarGaleriaLogos, mostrarGaleriaIconos, agregarTexto, limpiarCanvas, agregarThumbnail } from "../../Anunciante/TQ/js/controlesCanvas.js";
 
     document.addEventListener("DOMContentLoaded", () => {
       const intervalo = setInterval(() => {
@@ -448,10 +448,9 @@
             const btnIcono = document.createElement("button");
             btnIcono.textContent = "➕ Añadir ícono";
             btnIcono.onclick = () => {
-              agregarIcono(ref.canvas);
-              setTimeout(() => agregarThumbnail(ref.canvas, ref.galeriaId), 200);
+              mostrarGaleriaIconos(ref.canvas);
             };
-  
+
             const btnTexto = document.createElement("button");
             btnTexto.textContent = "📝 Añadir texto";
             btnTexto.onclick = () => {
@@ -492,6 +491,15 @@
       <h3>Selecciona un logo</h3>
       <div id="galeriaLogos" style="display:flex; flex-wrap:wrap; gap:10px;"></div>
       <button onclick="document.getElementById('modalLogos').style.display='none'" style="margin-top:10px;">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Modal para elegir ícono -->
+  <div id="modalIconos" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center;">
+    <div style="background:white; padding:20px; border-radius:8px; max-width:90%; max-height:80%; overflow:auto;">
+      <h3>Selecciona un ícono</h3>
+      <div id="galeriaIconos" style="display:flex; flex-wrap:wrap; gap:10px;"></div>
+      <button onclick="document.getElementById('modalIconos').style.display='none'" style="margin-top:10px;">Cerrar</button>
     </div>
   </div>
 
