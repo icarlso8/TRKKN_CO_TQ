@@ -74,6 +74,10 @@ export function agregarThumbnail(canvas, galeriaId) {
   btnEliminar.style.fontSize = "12px";
   btnEliminar.title = "Eliminar miniatura";
   btnEliminar.onclick = () => thumb.remove();
+
+  thumb.appendChild(img);
+  thumb.appendChild(btnEliminar);
+  galeria.appendChild(thumb);
 }
   
 export async function mostrarGaleriaLogos(canvas) {
@@ -104,9 +108,4 @@ export async function mostrarGaleriaLogos(canvas) {
   });
   
   document.getElementById("modalLogos").style.display = "flex";
-}
-
-  thumb.appendChild(img);
-  thumb.appendChild(btnEliminar);
-  galeria.appendChild(thumb);
 }
