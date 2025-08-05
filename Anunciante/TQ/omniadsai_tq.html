@@ -95,6 +95,35 @@
     .form-section.checkbox-opciones {
       margin-left: 24px;
     }
+      /* Estilo tipo tarjeta para los botones debajo del canvas */
+    .canvas-controls button {
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f7f7f7;
+      cursor: pointer;
+      margin: 4px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: background 0.2s ease;
+    }
+    .canvas-controls button:hover {
+      background: #eaeaea;
+    }
+    .canvas-controls img.icon {
+      width: 16px;
+      height: 16px;
+    }
+    /* Opcional: centrado debajo de cada canvas */
+    .canvas-controls {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
   </style>
   
   <script type="module">
@@ -377,6 +406,19 @@
         wrapper.appendChild(checkbox);
         wrapper.appendChild(label);
         wrapper.appendChild(canvas);
+        
+        // Botones tipo tarjeta
+        const controls = document.createElement("div");
+        controls.className = "canvas-controls";
+        
+        controls.innerHTML = `
+          <button onclick="agregarLogo('${t.id}')"><img class="icon" src="../../assets/icons/plus.png" />Añadir logo</button>
+          <button onclick="agregarIcono('${t.id}')"><img class="icon" src="../../assets/icons/plus.png" />Añadir ícono</button>
+          <button onclick="agregarTexto('${t.id}')"><img class="icon" src="../../assets/icons/text.png" />Añadir texto</button>
+          <button onclick="limpiarCanvas('${t.id}')"><img class="icon" src="../../assets/icons/delete.png" />Limpiar</button>
+        `;
+        
+        wrapper.appendChild(controls);
         canvasContainer.appendChild(wrapper);
 
         const fabricCanvas = new fabric.Canvas(canvas.id, {
