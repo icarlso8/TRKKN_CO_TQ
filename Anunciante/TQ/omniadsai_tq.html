@@ -426,7 +426,7 @@
   </script>
   <script type="module" src="../../Anunciante/TQ/js/controlesCanvas.js"></script>
     <script type="module">
-    import { agregarLogo, agregarIcono, agregarTexto, limpiarCanvas, agregarThumbnail } from "../../Anunciante/TQ/js/controlesCanvas.js";
+    import { mostrarGaleriaLogos, agregarIcono, agregarTexto, limpiarCanvas, agregarThumbnail } from "../../Anunciante/TQ/js/controlesCanvas.js";
 
     document.addEventListener("DOMContentLoaded", () => {
       const intervalo = setInterval(() => {
@@ -443,10 +443,9 @@
             const btnLogo = document.createElement("button");
             btnLogo.textContent = "➕ Añadir logo";
             btnLogo.onclick = () => {
-              agregarLogo(ref.canvas);
-              setTimeout(() => agregarThumbnail(ref.canvas, ref.galeriaId), 200);
+              mostrarGaleriaLogos(ref.canvas);
             };
-  
+
             const btnIcono = document.createElement("button");
             btnIcono.textContent = "➕ Añadir ícono";
             btnIcono.onclick = () => {
