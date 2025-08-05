@@ -83,6 +83,18 @@
       vertical-align: text-bottom; /* alinea con la parte inferior del texto.
       margin-right: 8px; /* espacio entre el ícono y el texto */
     }
+    .menu-list {
+      list-style-type: disc; /* Puedes cambiar a circle, square, etc. */
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start; /* Alinea botones con la viñeta */
+    }
+    
+    .menu-list li {
+      list-style-position: inside;
+    }
   </style>
 </head>
 
@@ -94,10 +106,12 @@
   </h1>
 
   <div class="menu">
-  <button onclick="location.href='omniadsai_v1.html'">Omni Ads AI v1.0</button>
-  <button onclick="location.href='wci.html'">WhatsApp Conversion Import (WCI)</button>
-  <button onclick="location.href='Anunciante/TQ/omniadsai_tq.html'">Omni Ads AI Tecnoquímicas</button>
-  <button id="logoutBtn">Cerrar sesión</button>
+    <ul class="menu-list">
+      <li><button onclick="location.href='omniadsai_v1.html'">🚀 Omni Ads AI v1.0</button></li>
+      <li><button onclick="location.href='wci.html'">💬 WhatsApp Conversion Import (WCI)</button></li>
+      <li><button onclick="location.href='Anunciante/TQ/omniadsai_tq.html'">💡 Omni Ads AI Tecnoquímicas</button></li>
+      <li><button id="logoutBtn">🔒 Cerrar sesión</button></li>
+    </ul>
   </div>
 
   <script>
