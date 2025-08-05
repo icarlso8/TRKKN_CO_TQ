@@ -45,3 +45,22 @@ export function limpiarCanvas(canvas) {
   canvas.backgroundColor = "#ffffff";
   canvas.renderAll();
 }
+
+export function agregarThumbnail(canvas, galeriaId) {
+  const dataURL = canvas.toDataURL({
+    format: 'png',
+    quality: 0.8
+  });
+
+  const img = document.createElement("img");
+  img.src = dataURL;
+  img.className = "thumbnail-preview";
+
+  img.onclick = () => {
+    const win = window.open();
+    win.document.write(`<img src="${dataURL}" style="max-width:100%">`);
+  };
+
+  const galeria = document.getElementById(galeriaId);
+  if (galeria) galeria.appendChild(img);
+}
