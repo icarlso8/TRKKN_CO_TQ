@@ -440,19 +440,31 @@
   
             const btnLogo = document.createElement("button");
             btnLogo.textContent = "➕ Añadir logo";
-            btnLogo.onclick = () => agregarLogo(ref.canvas);
+            btnLogo.onclick = () => {
+              agregarLogo(ref.canvas);
+              setTimeout(() => agregarThumbnail(ref.canvas, ref.galeriaId), 200);
+            };
   
             const btnIcono = document.createElement("button");
             btnIcono.textContent = "➕ Añadir ícono";
-            btnIcono.onclick = () => agregarIcono(ref.canvas);
+            btnIcono.onclick = () => {
+              agregarIcono(ref.canvas);
+              setTimeout(() => agregarThumbnail(ref.canvas, ref.galeriaId), 200);
+            };
   
             const btnTexto = document.createElement("button");
             btnTexto.textContent = "📝 Añadir texto";
-            btnTexto.onclick = () => agregarTexto(ref.canvas);
+            btnTexto.onclick = () => {
+              agregarTexto(ref.canvas);
+              setTimeout(() => agregarThumbnail(ref.canvas, ref.galeriaId), 200);
+            };
   
             const btnLimpiar = document.createElement("button");
             btnLimpiar.textContent = "🧽 Limpiar";
-            btnLimpiar.onclick = () => limpiarCanvas(ref.canvas);
+            btnLimpiar.onclick = () => {
+              limpiarCanvas(ref.canvas);
+              setTimeout(() => agregarThumbnail(ref.canvas, ref.galeriaId), 200);
+            };
   
             controls.appendChild(btnLogo);
             controls.appendChild(btnIcono);
@@ -464,7 +476,8 @@
             galeria.className = "galeria-thumbs";
             galeria.id = `galeria_${id}`;
             ref.galeriaId = galeria.id; // Guarda el ID por si lo necesitas luego
-            
+
+            ref.canvas.wrapperEl.parentElement.appendChild(controls);
             // Insertar la galería en el DOM
             ref.canvas.wrapperEl.parentElement.appendChild(galeria);
           }
