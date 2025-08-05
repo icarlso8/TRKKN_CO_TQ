@@ -146,28 +146,39 @@ export async function generarCreatividadesConFondos(canvasOriginal, audienciaId,
     height: canvasOriginal.height
   });
 
-  // Clonar el contenido del canvas original
+  // Clonar contenido del canvas original
   canvasOriginal.clone((clon) => {
     clon.getObjects().forEach(obj => canvasTemp.add(obj.clone()));
 
-    // Cargar imagen de fondo
+    // Ruta relativa del fondo
     const fondoUrl = `../../Anunciante/TQ/assets/fondos/${audienciaId}/${factorId}/${opcionId}/${tamañoId}/OmniAdsAI_TQ_${audienciaId}_${opcionId}_${tamañoId}_0001.png`;
 
-    fabric.Image.fromURL(fondoUrl, (fondoImg) => {
-      fondoImg.scaleToWidth(canvasTemp.width);
-      fondoImg.scaleToHeight(canvasTemp.height);
-      canvasTemp.setBackgroundImage(fondoImg, canvasTemp.renderAll.bind(canvasTemp));
+    // Verificar si la imagen existe antes de cargarla
+    fetch(fondoUrl, { method: "HEAD" }).then(response => {
+      if (!response.ok) {
+        console.warn(`⚠️ Fondo no encontrado: ${fondoUrl}`);
+        return; // Saltar esta combinación
+      }
 
-      // Render final y generar imagen base64
-      setTimeout(() => {
-        const dataURL = canvasTemp.toDataURL({ format: "png" });
+      // Cargar la imagen de fondo si existe
+      fabric.Image.fromURL(fondoUrl, (fondoImg) => {
+        fondoImg.scaleToWidth(canvasTemp.width);
+        fondoImg.scaleToHeight(canvasTemp.height);
+        canvasTemp.setBackgroundImage(fondoImg, () => {
+          canvasTemp.renderAll();
 
-        const nombreCreatividad = `OmniAdsAI_TQ_${nombreProducto}_${audienciaId}_${factorId}_${opcionId}_${tamañoId}_0001.png`;
+          // Esperar un poco antes de exportar
+          setTimeout(() => {
+            const dataURL = canvasTemp.toDataURL({ format: "png" });
+            const nombreCreatividad = `OmniAdsAI_TQ_${nombreProducto}_${audienciaId}_${factorId}_${opcionId}_${tamañoId}_0001.png`;
 
-        // Callback para agregar a la galería o ZIP
-        if (callback) callback(dataURL, nombreCreatividad);
-      }, 500);
-    }, { crossOrigin: 'anonymous' });
+            if (callback) callback(dataURL, nombreCreatividad);
+          }, 300);
+        });
+      }, { crossOrigin: 'anonymous' });
+
+    }).catch(err => {
+      console.error("Error verificando fondo:", fondoUrl, err);
+    });
   });
 }
-
