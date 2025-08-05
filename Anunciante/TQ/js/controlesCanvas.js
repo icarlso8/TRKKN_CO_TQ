@@ -74,7 +74,8 @@ export function agregarThumbnail(canvas, galeriaId) {
   btnEliminar.style.fontSize = "12px";
   btnEliminar.title = "Eliminar miniatura";
   btnEliminar.onclick = () => thumb.remove();
-
+}
+  
 export async function mostrarGaleriaLogos(canvas) {
   const contenedor = document.getElementById("galeriaLogos");
   contenedor.innerHTML = ""; // Limpiar antes de renderizar
