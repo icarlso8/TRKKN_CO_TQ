@@ -1,9 +1,9 @@
 [
-  { "id": "embarazadas", "nombre": "Embarazadas", "emoji": "🤰" },
-  { "id": "oficinistas", "nombre": "Oficinistas", "emoji": "💼" },
-  { "id": "universitarios", "nombre": "Universitarios", "emoji": "🎓" },
-  { "id": "adulto_mayor", "nombre": "Adulto mayor", "emoji": "👵" },
-  { "id": "conductores", "nombre": "Conductores/Repartidores", "emoji": "🚚" },
-  { "id": "medicados", "nombre": "Medicados", "emoji": "😷" },
-  { "id": "foodies", "nombre": "Foodies", "emoji": "🍔" }
+  { "id": "embarazadas", "nombre": "Embarazadas", "emoji": "🤰", "factores_disponibles": ["momento"] },
+  { "id": "oficinistas", "nombre": "Oficinistas", "emoji": "💼", "factores_disponibles": ["momento"] },
+  { "id": "universitarios", "nombre": "Universitarios", "emoji": "🎓", "factores_disponibles": ["momento"] },
+  { "id": "adulto_mayor", "nombre": "Adulto mayor", "emoji": "👵", "factores_disponibles": ["momento"] },
+  { "id": "conductores", "nombre": "Conductores/Repartidores", "emoji": "🚚", "factores_disponibles": ["momento"] },
+  { "id": "medicados", "nombre": "Medicados", "emoji": "😷", "factores_disponibles": ["momento"] },
+  { "id": "foodies", "nombre": "Foodies", "emoji": "🍔", "factores_disponibles": ["momento"] }
 ]
