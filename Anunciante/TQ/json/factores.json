@@ -9,39 +9,7 @@
       { "id": "noche", "nombre": "Noche", "emoji": "🌙" }
     ],
     "tamanos_disponibles": ["300x250", "728x90", "300x600", "320x480", "160x600", "320x50", "300x50"]
-  },
-  {
-    "id": "Test1",
-    "nombre": "Test1",
-    "emoji": "🎉",
-    "tipo": "checkbox",
-    "opciones": [
-      { "id": "1dad", "nombre": "2", "emoji": "🥳" },
-      { "id": "3ada", "nombre": "Noche", "4": "🌙" }
-    ],
-    "tamanos_disponibles": ["300x250", "728x90", "300x600", "320x480", "160x600", "320x50", "300x50"]
-  },
-  {
-    "id": "Test2",
-    "nombre": "Test2",
-    "emoji": "🎉",
-    "tipo": "checkbox",
-    "opciones": [
-      { "id": "1sf", "nombre": "2", "emoji": "🇨🇴" },
-      { "id": "3ggd", "nombre": "Noche", "4": "🎂" }
-    ],
-    "tamanos_disponibles": ["300x250", "728x90", "300x600", "320x480", "160x600", "320x50", "300x50"]
-  },
-  {
-    "id": "Test3",
-    "nombre": "Test3",
-    "emoji": "🎁",
-    "tipo": "checkbox",
-    "opciones": [
-      { "id": "1gds", "nombre": "2", "emoji": "🇨🇴" },
-      { "id": "3fsfsf", "nombre": "Noche", "4": "🎂" }
-    ],
-    "tamanos_disponibles": ["300x250", "728x90", "300x600", "320x480", "160x600", "320x50", "300x50"]
   }
 ]
+
 
