@@ -117,26 +117,7 @@
       border-color: #555;
     }
   </style>
-  
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-    import { firebaseConfig } from "../../firebase-config.js";
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    onAuthStateChanged(auth, user => {
-      if (!user) {
-        alert("🔒 Inicia sesión Trkkie!");
-        window.location.href = "../../auth.html";
-      } else {
-        console.log("✅ Usuario autenticado:", user.email);
-        document.body.style.display = "block";
-      }
-    });
-  </script>
-  
+  <script type="module" src="./js/auth.js"></script>  
 </head>
   
 <body style="display:none">
