@@ -12,8 +12,8 @@
 // La seguridad real depende de las reglas de seguridad de Firebase, no de ocultar el código en el frontend.
 // No mostrar en el front credenciales sensibles, secretos, tokens privados, etc.
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"; //  Trae los módulos de Firebase desde el CDN oficial
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js"; //  Trae los módulos de Firebase desde el CDN oficial
 import { firebaseConfig } from "../../../firebase-config.js"; //Ruta Relativa al firebase-config.js (Configuración)
 
 const app = initializeApp(firebaseConfig);
@@ -28,3 +28,4 @@ onAuthStateChanged(auth, user => {
     document.body.style.display = "block";
   }
 });
+
