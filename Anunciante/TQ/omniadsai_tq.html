@@ -125,6 +125,17 @@
   <h1><img src="logo_omniadsai_tq.png" alt="Cargando Logo TQ OmniAdsAI TRKKN..." style= "width: 500px; margin-left: 20px" /></h1>
   <form id="formulario"></form>
   <div class="canvas-wrapper" id="canvasContainer"></div>
+
+  <script type="module">
+    import { cargarJerarquia } from "./js/infoProduct.js";
+  
+    document.addEventListener("DOMContentLoaded", async () => {
+      await cargarJerarquia();
+      await cargarAudienciaFactores();
+      await cargarTamanosYCanvas();
+    });
+  </script>
+  
   <script>
     
     async function cargarAudienciaFactores() {
@@ -250,16 +261,6 @@
         });
       });
     }
-
-    <script type="module">
-      import { cargarJerarquia } from "./js/infoProduct.js";
-    
-      document.addEventListener("DOMContentLoaded", async () => {
-        await cargarJerarquia();
-        await cargarAudienciaFactores();
-        await cargarTamanosYCanvas();
-      });
-    </script>
 
   </script>
   
