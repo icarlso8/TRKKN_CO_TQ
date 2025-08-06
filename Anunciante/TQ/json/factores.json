@@ -16,8 +16,8 @@
     "emoji": "🎉",
     "tipo": "checkbox",
     "opciones": [
-      { "id": "1", "nombre": "2", "emoji": "🥳" },
-      { "id": "3", "nombre": "Noche", "4": "🌙" }
+      { "id": "1dad", "nombre": "2", "emoji": "🥳" },
+      { "id": "3ada", "nombre": "Noche", "4": "🌙" }
     ],
     "tamanos_disponibles": ["300x250", "728x90", "300x600", "320x480", "160x600", "320x50", "300x50"]
   },
@@ -27,8 +27,8 @@
     "emoji": "🎉",
     "tipo": "checkbox",
     "opciones": [
-      { "id": "1", "nombre": "2", "emoji": "🇨🇴" },
-      { "id": "3", "nombre": "Noche", "4": "🎂" }
+      { "id": "1sf", "nombre": "2", "emoji": "🇨🇴" },
+      { "id": "3ggd", "nombre": "Noche", "4": "🎂" }
     ],
     "tamanos_disponibles": ["300x250", "728x90", "300x600", "320x480", "160x600", "320x50", "300x50"]
   },
@@ -38,9 +38,10 @@
     "emoji": "🎁",
     "tipo": "checkbox",
     "opciones": [
-      { "id": "1", "nombre": "2", "emoji": "🇨🇴" },
-      { "id": "3", "nombre": "Noche", "4": "🎂" }
+      { "id": "1gds", "nombre": "2", "emoji": "🇨🇴" },
+      { "id": "3fsfsf", "nombre": "Noche", "4": "🎂" }
     ],
     "tamanos_disponibles": ["300x250", "728x90", "300x600", "320x480", "160x600", "320x50", "300x50"]
   }
 ]
+
