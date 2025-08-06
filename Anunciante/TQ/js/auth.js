@@ -28,4 +28,3 @@ onAuthStateChanged(auth, user => {
     document.body.style.display = "block";
   }
 });
-
