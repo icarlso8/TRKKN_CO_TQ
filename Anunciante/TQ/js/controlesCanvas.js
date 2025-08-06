@@ -140,12 +140,11 @@ export async function mostrarGaleriaIconos(canvas) {
   document.getElementById("modalIconos").style.display = "flex";
 }
 
-export async function generarCreatividadesConFondos(canvas, audienciaId, factorId, opcionId, tamañoId, nombreProducto, callback) {
-  // Validar fondo antes de cargarlo
+export async function generarCreatividadesConFondos(canvasOriginal, audienciaId, factorId, opcionId, tamañoId, nombreProducto, callback) {
   const baseRuta = `../../Anunciante/TQ/assets/fondos/${audienciaId}`;
   const posiblesRutas = [
     `${baseRuta}/${factorId}/${opcionId}/${tamañoId}`,
-    `${baseRuta}/audiencia/${audienciaId}/${tamañoId}`, // fallback por audiencia
+    `${baseRuta}/audiencia/${audienciaId}/${tamañoId}`,
   ];
 
   let imagenValida = null;
@@ -162,29 +161,40 @@ export async function generarCreatividadesConFondos(canvas, audienciaId, factorI
   }
 
   if (!imagenValida) {
-    console.warn(`⚠️ No se encontró imagen de fondo para ${audienciaId} - ${opcionId} - ${tamañoId}`);
-    return; // Salir silenciosamente
+    console.warn(`⚠️ Fondo no encontrado para: ${audienciaId} - ${opcionId} - ${tamañoId}`);
+    return;
   }
 
-  // Clonar canvas para no modificar el original
-  const copia = canvas.clone();
+  // Crear nuevo canvas temporal
+  const canvasTemp = new fabric.Canvas(null, {
+    width: canvasOriginal.getWidth(),
+    height: canvasOriginal.getHeight(),
+  });
 
-  // Cargar fondo solo si la imagen existe
+  // Clonar objetos del canvas original al nuevo canvas
+  const objetos = canvasOriginal.getObjects();
+  objetos.forEach(obj => {
+    obj.clone(clon => {
+      canvasTemp.add(clon);
+    });
+  });
+
+  // Cargar fondo si existe y luego renderizar
   fabric.Image.fromURL(imagenValida.ruta, (img) => {
     if (!img) {
       console.warn(`❌ No se pudo cargar la imagen: ${imagenValida.ruta}`);
       return;
     }
 
-    copia.setBackgroundImage(img, copia.renderAll.bind(copia), {
-      scaleX: copia.width / img.width,
-      scaleY: copia.height / img.height,
+    canvasTemp.setBackgroundImage(img, canvasTemp.renderAll.bind(canvasTemp), {
+      scaleX: canvasTemp.width / img.width,
+      scaleY: canvasTemp.height / img.height,
     });
 
-    // Esperar que se renderice con fondo
+    // Render final y generar imagen
     setTimeout(() => {
-      const dataURL = copia.toDataURL({ format: "png", multiplier: 1 });
+      const dataURL = canvasTemp.toDataURL({ format: "png", multiplier: 1 });
       callback(dataURL, imagenValida.nombreArchivo);
-    }, 500); // breve pausa para asegurar render completo
+    }, 300); // Pausa breve para asegurar render
   }, { crossOrigin: 'anonymous' });
 }
