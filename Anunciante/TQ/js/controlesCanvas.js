@@ -168,3 +168,20 @@ export async function generarCreatividadesConFondos(canvasOriginal, audienciaId,
     }, 300); // Pausa breve para asegurar render
   }, { crossOrigin: 'anonymous' });
 }
+
+export function BorradoPorTeclado() {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Delete" || e.key === "Backspace") {
+      const canvasRefs = window.canvasRefs;
+      if (!canvasRefs) return;
+
+      Object.values(canvasRefs).forEach(ref => {
+        const obj = ref.canvas.getActiveObject();
+        if (obj) {
+          ref.canvas.remove(obj);
+          ref.canvas.discardActiveObject().renderAll();
+        }
+      });
+    }
+  });
+}
