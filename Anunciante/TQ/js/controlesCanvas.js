@@ -140,45 +140,51 @@ export async function mostrarGaleriaIconos(canvas) {
   document.getElementById("modalIconos").style.display = "flex";
 }
 
-export async function generarCreatividadesConFondos(canvasOriginal, audienciaId, factorId, opcionId, tamañoId, nombreProducto, callback) {
-  const canvasTemp = new fabric.Canvas(null, {
-    width: canvasOriginal.width,
-    height: canvasOriginal.height
-  });
+export async function generarCreatividadesConFondos(canvas, audienciaId, factorId, opcionId, tamañoId, nombreProducto, callback) {
+  // Validar fondo antes de cargarlo
+  const baseRuta = `../../Anunciante/TQ/assets/fondos/${audienciaId}`;
+  const posiblesRutas = [
+    `${baseRuta}/${factorId}/${opcionId}/${tamañoId}`,
+    `${baseRuta}/audiencia/${audienciaId}/${tamañoId}`, // fallback por audiencia
+  ];
 
-  // Clonar contenido del canvas original
-  canvasOriginal.clone((clon) => {
-    clon.getObjects().forEach(obj => canvasTemp.add(obj.clone()));
+  let imagenValida = null;
 
-    // Ruta relativa del fondo
-    const fondoUrl = `../../Anunciante/TQ/assets/fondos/${audienciaId}/${factorId}/${opcionId}/${tamañoId}/OmniAdsAI_TQ_${audienciaId}_${opcionId}_${tamañoId}_0001.png`;
+  for (const ruta of posiblesRutas) {
+    const nombreArchivo = `OmniAdsAI_TQ_${audienciaId}_${opcionId}_${tamañoId}_0001.png`;
+    const rutaCompleta = `${ruta}/${nombreArchivo}`;
+    const existe = await fetch(rutaCompleta, { method: "HEAD" }).then(res => res.ok).catch(() => false);
 
-    // Verificar si la imagen existe antes de cargarla
-    fetch(fondoUrl, { method: "HEAD" }).then(response => {
-      if (!response.ok) {
-        console.warn(`⚠️ Fondo no encontrado: ${fondoUrl}`);
-        return; // Saltar esta combinación
-      }
+    if (existe) {
+      imagenValida = { ruta: rutaCompleta, nombreArchivo };
+      break;
+    }
+  }
 
-      // Cargar la imagen de fondo si existe
-      fabric.Image.fromURL(fondoUrl, (fondoImg) => {
-        fondoImg.scaleToWidth(canvasTemp.width);
-        fondoImg.scaleToHeight(canvasTemp.height);
-        canvasTemp.setBackgroundImage(fondoImg, () => {
-          canvasTemp.renderAll();
+  if (!imagenValida) {
+    console.warn(`⚠️ No se encontró imagen de fondo para ${audienciaId} - ${opcionId} - ${tamañoId}`);
+    return; // Salir silenciosamente
+  }
 
-          // Esperar un poco antes de exportar
-          setTimeout(() => {
-            const dataURL = canvasTemp.toDataURL({ format: "png" });
-            const nombreCreatividad = `OmniAdsAI_TQ_${nombreProducto}_${audienciaId}_${factorId}_${opcionId}_${tamañoId}_0001.png`;
+  // Clonar canvas para no modificar el original
+  const copia = canvas.clone();
 
-            if (callback) callback(dataURL, nombreCreatividad);
-          }, 300);
-        });
-      }, { crossOrigin: 'anonymous' });
+  // Cargar fondo solo si la imagen existe
+  fabric.Image.fromURL(imagenValida.ruta, (img) => {
+    if (!img) {
+      console.warn(`❌ No se pudo cargar la imagen: ${imagenValida.ruta}`);
+      return;
+    }
 
-    }).catch(err => {
-      console.error("Error verificando fondo:", fondoUrl, err);
+    copia.setBackgroundImage(img, copia.renderAll.bind(copia), {
+      scaleX: copia.width / img.width,
+      scaleY: copia.height / img.height,
     });
-  });
+
+    // Esperar que se renderice con fondo
+    setTimeout(() => {
+      const dataURL = copia.toDataURL({ format: "png", multiplier: 1 });
+      callback(dataURL, imagenValida.nombreArchivo);
+    }, 500); // breve pausa para asegurar render completo
+  }, { crossOrigin: 'anonymous' });
 }
