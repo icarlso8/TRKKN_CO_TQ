@@ -27,5 +27,4 @@ onAuthStateChanged(auth, user => {
     console.log("✅ Usuario autenticado:", user.email);
     document.body.style.display = "block";
   }
-
 });
