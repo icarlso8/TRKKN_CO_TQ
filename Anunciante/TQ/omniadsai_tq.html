@@ -123,9 +123,6 @@
 <body style="display:none">
   <h1><img src="Logo_TQ_OmniAdsAI_TRKKN.png" alt="Cargando Logo TQ OmniAdsAI TRKKN..." style= "width: 500px; margin-left: 20px" /></h1>
   <form id="formulario"></form>
-  <div style="margin-top: 20px;">
-    <button id="btnGenerar" style="padding: 10px 16px; font-weight: bold;">🎬 Generar creatividades</button>
-  </div>
   <div class="canvas-wrapper" id="canvasContainer"></div>
   <script>
     
@@ -408,6 +405,7 @@
       await cargarTamanosYCanvas();
     });
   </script>
+  
     <script type="module">
     import { mostrarGaleriaLogos, mostrarGaleriaIconos, agregarTexto, limpiarCanvas, agregarThumbnail } from "../../Anunciante/TQ/js/controlesCanvas.js";
 
@@ -518,7 +516,7 @@
       btnGenerar.style.border = "none";
       btnGenerar.style.cursor = "pointer";
     
-      document.body.appendChild(btnGenerar);
+      document.getElementById("formulario").insertAdjacentElement("afterend", btnGenerar); //Ubicación del botón (dinámico) de generación al final del formulario.
     
       btnGenerar.onclick = () => {
         const audiencias = obtenerValoresSeleccionados("audiencia");
