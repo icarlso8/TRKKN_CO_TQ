@@ -5,11 +5,6 @@
   { "id": "adulto_mayor", "nombre": "Adulto mayor", "emoji": "👵", "factores_disponibles": ["momento"] },
   { "id": "conductores", "nombre": "Conductores/Repartidores", "emoji": "🚚", "factores_disponibles": ["momento"] },
   { "id": "medicados", "nombre": "Medicados", "emoji": "😷", "factores_disponibles": ["momento"] },
-  { "id": "foodies", "nombre": "Foodies", "emoji": "🍔", "factores_disponibles": ["momento"] },
-  { "id": "Test1", "nombre": "Test1", "emoji": "🎉", "factores_disponibles": ["momento"] },
-  { "id": "Test2", "nombre": "Test2", "emoji": "🥳", "factores_disponibles": ["momento"] },
-  { "id": "Test3", "nombre": "Test3", "emoji": "🎁", "factores_disponibles": ["momento"] },
-  { "id": "Test4", "nombre": "Test4", "emoji": "🎂", "factores_disponibles": ["momento"] },
-  { "id": "Test5", "nombre": "Test5", "emoji": "🕯️", "factores_disponibles": ["momento"] },
-  { "id": "Test6", "nombre": "Test6", "emoji": "🇨🇴", "factores_disponibles": ["momento"] }
+  { "id": "foodies", "nombre": "Foodies", "emoji": "🍔", "factores_disponibles": ["momento"] }
 ]
+
