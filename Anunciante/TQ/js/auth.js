@@ -2,6 +2,7 @@
 // ⚠️ Recomendaciones:
 // Importación como <script type="module">
 // Importar dentro dentro y antes de cerrar </head> con <script type="module" src="./js/auth.js"></script>
+// 📌 Es decir, se busca un archivo auth.js dentro de una carpeta js que está en el mismo nivel del .html
 // Asegúrate de que en tu HTML el <body> esté inicialmente oculto inmediatamente después de </head>
 // Así: <body style="display:none"> () (De esta forma el <body> no se muestra sin autenticación.
 // Cualquier archivo JavaScript estático cargado desde GitHub Pages o cualquier servidor público es público
@@ -26,4 +27,5 @@ onAuthStateChanged(auth, user => {
     console.log("✅ Usuario autenticado:", user.email);
     document.body.style.display = "block";
   }
+
 });
