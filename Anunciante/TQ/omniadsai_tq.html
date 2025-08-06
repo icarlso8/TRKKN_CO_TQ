@@ -251,11 +251,16 @@
       });
     }
 
-    document.addEventListener("DOMContentLoaded", async () => {
-      await cargarJerarquia();
-      await cargarAudienciaFactores();
-      await cargarTamanosYCanvas();
-    });
+    <script type="module">
+      import { cargarJerarquia } from "./js/infoProduct.js";
+    
+      document.addEventListener("DOMContentLoaded", async () => {
+        await cargarJerarquia();
+        await cargarAudienciaFactores();
+        await cargarTamanosYCanvas();
+      });
+    </script>
+
   </script>
   
     <script type="module">
