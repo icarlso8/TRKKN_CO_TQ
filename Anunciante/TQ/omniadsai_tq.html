@@ -208,26 +208,26 @@
             controls.style.marginBottom = "20px";
   
             const btnLogo = document.createElement("button");
-            btnLogo.textContent = "➕ Añadir logo";
+            btnLogo.textContent = "➕logo";
             btnLogo.onclick = () => {
               mostrarGaleriaLogos(ref.canvas);
             };
   
             const btnIcono = document.createElement("button");
-            btnIcono.textContent = "➕ Añadir ícono";
+            btnIcono.textContent = "➕ícono";
             btnIcono.onclick = () => {
               mostrarGaleriaIconos(ref.canvas);
             };
   
             const btnTexto = document.createElement("button");
-            btnTexto.textContent = "📝 Añadir texto";
+            btnTexto.textContent = "📝texto";
             btnTexto.onclick = () => {
               agregarTexto(ref.canvas);
               setTimeout(() => agregarThumbnail(ref.canvas, ref.galeriaId), 200);
             };
   
             const btnLimpiar = document.createElement("button");
-            btnLimpiar.textContent = "🧽 Limpiar";
+            btnLimpiar.textContent = "🧽Limpiar";
             btnLimpiar.onclick = () => {
               limpiarCanvas(ref.canvas);
               setTimeout(() => agregarThumbnail(ref.canvas, ref.galeriaId), 200);
