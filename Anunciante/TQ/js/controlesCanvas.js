@@ -169,7 +169,7 @@ export async function generarCreatividadesConFondos(canvasOriginal, audienciaId,
   }, { crossOrigin: 'anonymous' });
 }
 
-export function BorradoPorTeclado() {
+export function borradoPorTeclado() {
   document.addEventListener("keydown", (e) => {
     if (e.key === "Delete" || e.key === "Backspace") {
       const canvasRefs = window.canvasRefs;
