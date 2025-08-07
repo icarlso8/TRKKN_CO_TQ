@@ -134,15 +134,17 @@
       await cargarJerarquia();
       await cargarAudienciaFactores();
       await borradoPorTeclado();
-      await cargarTamanosYCanvas();
-
-      // Aplica resaltado a cada canvas
+  
+      await cargarTamanosYCanvas(); // 👈 debe ir antes
+  
+      // Asegura que canvasRefs ya existe
+      console.log("🧪 canvasRefs disponibles:", window.canvasRefs);
       for (const id in window.canvasRefs) {
-        activarResaltado(window.canvasRefs[id].canvas)
+        activarResaltado(window.canvasRefs[id].canvas);
       }
     });
   </script>
-  
+
   <script>
     async function cargarTamanosYCanvas() {
       const jsonPath = "../../Anunciante/TQ/json/";
