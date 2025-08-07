@@ -1,15 +1,16 @@
-export function agregarTexto(canvas) { 
-  const text = new fabric.IText("Texto personalizado", {
-    left: 80,
-    top: 80,
-    fontFamily: "Mulish",
-    fontSize: 22,
-    fill: "#000",
-    fontWeight: "bold",
-    selectable: true // ✅
+export function agregarTexto(canvas) {
+  const texto = new fabric.Textbox('Texto aquí', {
+    left: 50,
+    top: 50,
+    fontSize: 30,
+    fontFamily: 'Mulish',
+    fill: '#000000',
+    shadow: '', // ← Para agregar después
+    editable: true
   });
-  canvas.add(text).setActiveObject(text);
+  canvas.add(texto).setActiveObject(texto);
 }
+
 
 export function limpiarCanvas(canvas) {
   canvas.clear();
