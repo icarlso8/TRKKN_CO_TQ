@@ -256,6 +256,7 @@
             
             const colorPicker = document.createElement("input");
             colorPicker.type = "color";
+            colorPicker.value = "#000000";
             colorPicker.oninput = () => {
               const active = ref.canvas.getActiveObject();
               if (active && active.type === "text") {
@@ -280,7 +281,7 @@
               }
             };
             
-            // Agregar los controles al contenedor principal
+            // Agrega los controles visuales
             controls.appendChild(fontSelector);
             controls.appendChild(colorPicker);
             controls.appendChild(shadowToggle);
