@@ -185,3 +185,32 @@ export function borradoPorTeclado() {
     }
   });
 }
+export function activarResaltado(canvas) {
+  canvas.on("selection:created", resaltarObjeto);
+  canvas.on("selection:updated", resaltarObjeto);
+  canvas.on("selection:cleared", quitarResaltado);
+
+  function resaltarObjeto(e) {
+    const obj = e.target;
+    if (obj) {
+      obj.set({
+        borderColor: "red",
+        cornerColor: "red",
+        cornerSize: 8,
+        transparentCorners: false
+      });
+      canvas.renderAll();
+    }
+  }
+
+  function quitarResaltado() {
+    const obj = canvas.getActiveObject();
+    if (obj) {
+      obj.set({
+        borderColor: "gray",
+        cornerColor: "gray"
+      });
+      canvas.renderAll();
+    }
+  }
+}
