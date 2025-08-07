@@ -186,12 +186,15 @@ export function borradoPorTeclado() {
   });
 }
 export function activarResaltado(canvas) {
+  console.log("🎯 Activando resaltado en canvas:", canvas);
+  
   canvas.on("selection:created", resaltarObjeto);
   canvas.on("selection:updated", resaltarObjeto);
   canvas.on("selection:cleared", quitarResaltado);
 
   function resaltarObjeto(e) {
     const obj = e.target;
+    console.log("🟥 Objeto seleccionado:", obj);
     if (obj) {
       obj.set({
         borderColor: "red",
@@ -206,6 +209,7 @@ export function activarResaltado(canvas) {
   function quitarResaltado() {
     const obj = canvas.getActiveObject();
     if (obj) {
+      console.log("❌ Quitar resaltado de:", obj);
       obj.set({
         borderColor: "gray",
         cornerColor: "gray"
