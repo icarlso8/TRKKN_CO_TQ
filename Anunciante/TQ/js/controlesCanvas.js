@@ -1,11 +1,12 @@
-export function agregarTexto(canvas) {
+export function agregarTexto(canvas) { 
   const text = new fabric.IText("Texto personalizado", {
     left: 80,
     top: 80,
     fontFamily: "Mulish",
     fontSize: 22,
     fill: "#000",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    selectable: true // ✅
   });
   canvas.add(text).setActiveObject(text);
 }
@@ -68,7 +69,13 @@ export async function mostrarGaleriaLogos(canvas) {
     img.onclick = () => {
       fabric.Image.fromURL(img.src, function(fabImg) {
         fabImg.scaleToWidth(100);
-        fabImg.set({ left: 20, top: 20, hasBorders: true, hasControls: true });
+        fabImg.set({ 
+          left: 20, 
+          top: 20, 
+          hasBorders: true, 
+          hasControls: true,
+          selectable: true // ✅
+        });
         canvas.add(fabImg).setActiveObject(fabImg);
       });
       document.getElementById("modalLogos").style.display = "none";
@@ -98,7 +105,13 @@ export async function mostrarGaleriaIconos(canvas) {
     img.onclick = () => {
       fabric.Image.fromURL(img.src, function(fabImg) {
         fabImg.scaleToWidth(60);
-        fabImg.set({ left: 50, top: 50, hasBorders: true, hasControls: true });
+        fabImg.set({ 
+          left: 50, 
+          top: 50, 
+          hasBorders: true, 
+          hasControls: true,
+          selectable: true // ✅
+        });
         canvas.add(fabImg).setActiveObject(fabImg);
       });
       document.getElementById("modalIconos").style.display = "none";
@@ -145,6 +158,7 @@ export async function generarCreatividadesConFondos(canvasOriginal, audienciaId,
   const objetos = canvasOriginal.getObjects();
   objetos.forEach(obj => {
     obj.clone(clon => {
+      clon.set({ selectable: true }); // ✅
       canvasTemp.add(clon);
     });
   });
@@ -165,7 +179,7 @@ export async function generarCreatividadesConFondos(canvasOriginal, audienciaId,
     setTimeout(() => {
       const dataURL = canvasTemp.toDataURL({ format: "png", multiplier: 1 });
       callback(dataURL, imagenValida.nombreArchivo);
-    }, 300); // Pausa breve para asegurar render
+    }, 300);
   }, { crossOrigin: 'anonymous' });
 }
 
@@ -185,6 +199,7 @@ export function borradoPorTeclado() {
     }
   });
 }
+
 export function activarResaltado(canvas) {
   console.log("🎯 Activando resaltado en canvas:", canvas);
   
