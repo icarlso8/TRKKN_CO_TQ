@@ -212,7 +212,7 @@ export function crearControlesTexto(ref) {
   });
   fontSelector.onchange = () => {
     const active = ref.canvas.getActiveObject();
-    if (active && active.type === "textbox") {
+    if (active && (active.type === "textbox" || active.type === "text"))
       active.set("fontFamily", fontSelector.value);
       ref.canvas.requestRenderAll();
     }
@@ -223,7 +223,7 @@ export function crearControlesTexto(ref) {
   colorPicker.value = "#000000";
   colorPicker.oninput = () => {
     const active = ref.canvas.getActiveObject();
-    if (active && active.type === "textbox") {
+    if (active && (active.type === "textbox" || active.type === "text"))
       active.set("fill", colorPicker.value);
       ref.canvas.requestRenderAll();
     }
@@ -233,7 +233,7 @@ export function crearControlesTexto(ref) {
   shadowToggle.textContent = "🌑 Sombra";
   shadowToggle.onclick = () => {
     const active = ref.canvas.getActiveObject();
-    if (active && active.type === "textbox") {
+    if (active && (active.type === "textbox" || active.type === "text"))
       const hasShadow = !!active.shadow;
       active.set("shadow", hasShadow ? null : {
         color: "rgba(0,0,0,0.3)",
