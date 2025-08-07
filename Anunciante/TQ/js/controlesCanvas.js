@@ -1,16 +1,17 @@
 export function agregarTexto(canvas) {
-  const texto = new fabric.Textbox('Texto aquí', {
+  const text = new fabric.Textbox("Escribe aquí", {
     left: 50,
     top: 50,
-    fontSize: 30,
-    fontFamily: 'Mulish',
-    fill: '#000000',
-    shadow: '', // ← Para agregar después
+    fontSize: 24,
+    fill: "#000000",
+    fontFamily: "Arial",
     editable: true
   });
-  canvas.add(texto).setActiveObject(texto);
-}
 
+  canvas.add(text);
+  canvas.setActiveObject(text);  // Selecciona automáticamente el texto al añadirlo
+  canvas.requestRenderAll();
+}
 
 export function limpiarCanvas(canvas) {
   canvas.clear();
@@ -199,4 +200,50 @@ export function borradoPorTeclado() {
       });
     }
   });
+}
+
+export function crearControlesTexto(ref) {
+  const fontSelector = document.createElement("select");
+  ["Arial", "Verdana", "Times New Roman", "Courier New", "Georgia"].forEach(font => {
+    const option = document.createElement("option");
+    option.value = font;
+    option.textContent = font;
+    fontSelector.appendChild(option);
+  });
+  fontSelector.onchange = () => {
+    const active = ref.canvas.getActiveObject();
+    if (active && active.type === "textbox") {
+      active.set("fontFamily", fontSelector.value);
+      ref.canvas.requestRenderAll();
+    }
+  };
+
+  const colorPicker = document.createElement("input");
+  colorPicker.type = "color";
+  colorPicker.value = "#000000";
+  colorPicker.oninput = () => {
+    const active = ref.canvas.getActiveObject();
+    if (active && active.type === "textbox") {
+      active.set("fill", colorPicker.value);
+      ref.canvas.requestRenderAll();
+    }
+  };
+
+  const shadowToggle = document.createElement("button");
+  shadowToggle.textContent = "🌑 Sombra";
+  shadowToggle.onclick = () => {
+    const active = ref.canvas.getActiveObject();
+    if (active && active.type === "textbox") {
+      const hasShadow = !!active.shadow;
+      active.set("shadow", hasShadow ? null : {
+        color: "rgba(0,0,0,0.3)",
+        blur: 5,
+        offsetX: 2,
+        offsetY: 2
+      });
+      ref.canvas.requestRenderAll();
+    }
+  };
+
+  return [fontSelector, colorPicker, shadowToggle];
 }
