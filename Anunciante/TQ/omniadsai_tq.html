@@ -136,12 +136,10 @@
       await borradoPorTeclado();
       await cargarTamanosYCanvas();
 
-      // Después de que los canvas estén listos, activa el resaltado
-      setTimeout(() => {
-        fabricCanvases.forEach((canvas) => {
-          activarResaltado(canvas);
-        });
-      }, 500); // Espera para asegurar que todos los canvas están inicializados
+      // Aplica resaltado a cada canvas
+      for (const idCanvas in fabricCanvases) {
+        activarResaltado(fabricCanvases[idCanvas]);
+      }
     });
   </script>
   
