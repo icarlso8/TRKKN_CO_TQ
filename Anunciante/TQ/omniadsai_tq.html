@@ -137,8 +137,8 @@
       await cargarTamanosYCanvas();
 
       // Aplica resaltado a cada canvas
-      for (const idCanvas in fabricCanvases) {
-        activarResaltado(fabricCanvases[idCanvas]);
+      for (const id in window.canvasRefs) {
+        activarResaltado(window.canvasRefs[id].canvas)
       }
     });
   </script>
