@@ -237,7 +237,54 @@
             controls.appendChild(btnIcono);
             controls.appendChild(btnTexto);
             controls.appendChild(btnLimpiar);
-  
+
+            // 🎨 Controles de estilo de texto
+            const fontSelector = document.createElement("select");
+            ["Arial", "Verdana", "Times New Roman", "Courier New", "Georgia"].forEach(font => {
+              const option = document.createElement("option");
+              option.value = font;
+              option.textContent = font;
+              fontSelector.appendChild(option);
+            });
+            fontSelector.onchange = () => {
+              const active = ref.canvas.getActiveObject();
+              if (active && active.type === "text") {
+                active.set("fontFamily", fontSelector.value);
+                ref.canvas.requestRenderAll();
+              }
+            };
+            
+            const colorPicker = document.createElement("input");
+            colorPicker.type = "color";
+            colorPicker.oninput = () => {
+              const active = ref.canvas.getActiveObject();
+              if (active && active.type === "text") {
+                active.set("fill", colorPicker.value);
+                ref.canvas.requestRenderAll();
+              }
+            };
+            
+            const shadowToggle = document.createElement("button");
+            shadowToggle.textContent = "🌑 Sombra";
+            shadowToggle.onclick = () => {
+              const active = ref.canvas.getActiveObject();
+              if (active && active.type === "text") {
+                const hasShadow = !!active.shadow;
+                active.set("shadow", hasShadow ? null : {
+                  color: "rgba(0,0,0,0.3)",
+                  blur: 5,
+                  offsetX: 2,
+                  offsetY: 2
+                });
+                ref.canvas.requestRenderAll();
+              }
+            };
+            
+            // Agregar los controles al contenedor principal
+            controls.appendChild(fontSelector);
+            controls.appendChild(colorPicker);
+            controls.appendChild(shadowToggle);
+
             // Crear contenedor de miniaturas (galería)
             const galeria = document.createElement("div");
             galeria.className = "galeria-thumbs";
